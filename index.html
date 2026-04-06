@@ -256,12 +256,12 @@
         ] },
         { name: "Г–К", words: [
             { word: "дру_", correct: "г", wrongOptions: ["к"], rule: "Друг — парная г (проверь: друзья)" },
-            { word: "лу_", correct: "к", wrongOptions: ["г"], rule: "Лук — парная к (проверь: луки)" },
+            { word: "вра_", correct: "г", wrongOptions: ["к"], rule: "Враг — парная г (проверь: враги)" },        // было "лу_" → "вра_"
             { word: "сапо_", correct: "г", wrongOptions: ["к"], rule: "Сапог — парная г (проверь: сапоги)" }
         ] },
         { name: "Д–Т", words: [
             { word: "сле_", correct: "д", wrongOptions: ["т"], rule: "След — парная д (проверь: следы)" },
-            { word: "ро_", correct: "т", wrongOptions: ["д"], rule: "Рот — парная т (проверь: рты)" },
+            { word: "лё_", correct: "д", wrongOptions: ["т"], rule: "Лёд — парная д (проверь: льды)" },          // было "ро_" → "лё_"
             { word: "горо_", correct: "д", wrongOptions: ["т"], rule: "Город — парная д (проверь: города)" }
         ] },
         { name: "Ж–Ш", words: [
@@ -284,8 +284,8 @@
         { word: "сле_", correct: "д", pair: "д-т", rule: "След — проверь: следы" },
         { word: "эта_", correct: "ж", pair: "ж-ш", rule: "Этаж — проверь: этажи" },
         { word: "арбу_", correct: "з", pair: "з-с", rule: "Арбуз — проверь: арбузы" },
-        { word: "лу_", correct: "к", pair: "г-к", rule: "Лук — проверь: луки" },
-        { word: "ро_", correct: "т", pair: "д-т", rule: "Рот — проверь: рты" },
+        { word: "вра_", correct: "г", pair: "г-к", rule: "Враг — проверь: враги" },          // было "лу_"
+        { word: "лё_", correct: "д", pair: "д-т", rule: "Лёд — проверь: льды" },            // было "ро_"
         { word: "каранда_", correct: "ш", pair: "ж-ш", rule: "Карандаш — проверь: карандаши" },
         { word: "анана_", correct: "с", pair: "з-с", rule: "Ананас — проверь: ананасы" },
         { word: "гри_", correct: "б", pair: "б-п", rule: "Гриб — проверь: грибы" },
@@ -310,8 +310,8 @@
     let globalScore = 0;
     let maxPossible = 0;
     
-    let practiceAnswers = {};      // для каждого слова в текущей практике
-    let mixedAnswers = [];          // для смешанного теста
+    let practiceAnswers = {};
+    let mixedAnswers = [];
 
     const mainDiv = document.getElementById('mainContent');
     const scoreDisplay = document.getElementById('globalScoreDisplay');
@@ -404,9 +404,7 @@
             disabled = true;
         }
 
-        // кнопки: правильная буква + неправильная (из wrongOptions)
         let letters = [item.correct, ...item.wrongOptions];
-        // добавим ещё случайные? не надо, достаточно
         let optionsHtml = `<div class="options">`;
         for (let letter of letters) {
             optionsHtml += `<button class="opt-btn" data-letter="${letter}" ${disabled ? 'disabled' : ''}>${letter.toUpperCase()}</button>`;
@@ -479,7 +477,6 @@
             `;
         }
 
-        // для смешанного теста предлагаем две буквы: правильную и противоположную из пары
         let wrongLetter = '';
         if (item.correct === 'б') wrongLetter = 'п';
         else if (item.correct === 'п') wrongLetter = 'б';
