@@ -256,12 +256,12 @@
         ] },
         { name: "Г–К", words: [
             { word: "дру_", correct: "г", wrongOptions: ["к"], rule: "Друг — парная г (проверь: друзья)" },
-            { word: "вра_", correct: "г", wrongOptions: ["к"], rule: "Враг — парная г (проверь: враги)" },        // было "лу_" → "вра_"
+            { word: "вра_", correct: "г", wrongOptions: ["к"], rule: "Враг — парная г (проверь: враги)" },
             { word: "сапо_", correct: "г", wrongOptions: ["к"], rule: "Сапог — парная г (проверь: сапоги)" }
         ] },
         { name: "Д–Т", words: [
             { word: "сле_", correct: "д", wrongOptions: ["т"], rule: "След — парная д (проверь: следы)" },
-            { word: "лё_", correct: "д", wrongOptions: ["т"], rule: "Лёд — парная д (проверь: льды)" },          // было "ро_" → "лё_"
+            { word: "лё_", correct: "д", wrongOptions: ["т"], rule: "Лёд — парная д (проверь: льды)" },
             { word: "горо_", correct: "д", wrongOptions: ["т"], rule: "Город — парная д (проверь: города)" }
         ] },
         { name: "Ж–Ш", words: [
@@ -284,22 +284,21 @@
         { word: "сле_", correct: "д", pair: "д-т", rule: "След — проверь: следы" },
         { word: "эта_", correct: "ж", pair: "ж-ш", rule: "Этаж — проверь: этажи" },
         { word: "арбу_", correct: "з", pair: "з-с", rule: "Арбуз — проверь: арбузы" },
-        { word: "вра_", correct: "г", pair: "г-к", rule: "Враг — проверь: враги" },          // было "лу_"
-        { word: "лё_", correct: "д", pair: "д-т", rule: "Лёд — проверь: льды" },            // было "ро_"
+        { word: "вра_", correct: "г", pair: "г-к", rule: "Враг — проверь: враги" },
+        { word: "лё_", correct: "д", pair: "д-т", rule: "Лёд — проверь: льды" },
         { word: "каранда_", correct: "ш", pair: "ж-ш", rule: "Карандаш — проверь: карандаши" },
         { word: "анана_", correct: "с", pair: "з-с", rule: "Ананас — проверь: ананасы" },
         { word: "гри_", correct: "б", pair: "б-п", rule: "Гриб — проверь: грибы" },
         { word: "сапо_", correct: "г", pair: "г-к", rule: "Сапог — проверь: сапоги" }
     ];
 
-    // Построение этапов: правило (общее) + по одной практике на пару + смешанный тест
+    // Построение этапов: правило + практика по каждой паре + смешанный тест
     let stages = [
         { type: "rule", title: "Что такое парные согласные?", 
           text: "Звонкие и глухие согласные образуют пары. В конце слова или перед глухим согласным звонкий звук оглушается. Чтобы проверить, измени слово так, чтобы после согласного стоял гласный.",
           pairs: ["б-п", "в-ф", "г-к", "д-т", "ж-ш", "з-с"],
           examples: "зуб — зубы, суп — супы, глаз — глаза" }
     ];
-    // добавляем практику для каждой пары
     for (let i = 0; i < pairs.length; i++) {
         stages.push({ type: "practice", pairIndex: i, pairName: pairs[i].name, words: pairs[i].words });
     }
@@ -315,6 +314,15 @@
 
     const mainDiv = document.getElementById('mainContent');
     const scoreDisplay = document.getElementById('globalScoreDisplay');
+
+    // Функция случайного перемешивания массива (Фишера-Йетса)
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
 
     function updateScoreUI() {
         scoreDisplay.innerText = `⭐ ${globalScore} баллов`;
@@ -404,9 +412,12 @@
             disabled = true;
         }
 
-        let letters = [item.correct, ...item.wrongOptions];
+        // Собираем массив вариантов и перемешиваем
+        let variants = [item.correct, ...item.wrongOptions];
+        let shuffledVariants = shuffleArray([...variants]);
+        
         let optionsHtml = `<div class="options">`;
-        for (let letter of letters) {
+        for (let letter of shuffledVariants) {
             optionsHtml += `<button class="opt-btn" data-letter="${letter}" ${disabled ? 'disabled' : ''}>${letter.toUpperCase()}</button>`;
         }
         optionsHtml += `</div>`;
@@ -491,9 +502,10 @@
         else if (item.correct === 'з') wrongLetter = 'с';
         else if (item.correct === 'с') wrongLetter = 'з';
         
-        let letters = [item.correct, wrongLetter];
+        let variants = [item.correct, wrongLetter];
+        let shuffledVariants = shuffleArray([...variants]);
         let optionsHtml = `<div class="options">`;
-        for (let letter of letters) {
+        for (let letter of shuffledVariants) {
             optionsHtml += `<button class="opt-btn" data-letter="${letter}" ${disabled ? 'disabled' : ''}>${letter.toUpperCase()}</button>`;
         }
         optionsHtml += `</div>`;
