@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Парные согласные в конце слова: тренажёр для 2-3 класса (АООП вариант 7.1, 7.2)</title>
+    <title>Парные согласные в конце слова | 2–3 класс | АООП вариант 7.1, 7.2</title>
     <style>
         * {
             margin: 0;
@@ -129,7 +129,7 @@
             background: #e6f6f3;
             padding: 30px 20px;
             border-radius: 70px;
-            letter-spacing: 12px;
+            letter-spacing: 4px;
             color: #1e5a4a;
             margin: 20px 0;
         }
@@ -238,7 +238,7 @@
             color: white;
         }
         @media (max-width: 550px) {
-            .task-word { font-size: 2rem; letter-spacing: 6px; }
+            .task-word { font-size: 2rem; letter-spacing: 2px; }
             .opt-btn { font-size: 1.6rem; padding: 10px 25px; min-width: 90px; }
             .next-btn { font-size: 1.2rem; }
             .example-item { font-size: 1.2rem; padding: 8px 18px; }
@@ -248,24 +248,23 @@
 <body>
 <div class="game-container" id="app">
     <div class="header">
-        <h1>📖 Парные согласные в конце слова</h1>
+        <h1>Парные согласные в конце слова</h1>
         <p>2–3 класс · АООП вариант 7.1, 7.2</p>
     </div>
     <div class="stats">
-        <div class="score-box">⭐ Очки: <span id="scoreValue">0</span></div>
-        <div class="question-counter">📋 <span id="phaseInfo">Вступление</span></div>
+        <div class="score-box">⭐ очки: <span id="scoreValue">0</span></div>
+        <div class="question-counter">📋 <span id="phaseInfo">вступление</span></div>
     </div>
     <div class="content" id="mainContent"></div>
 </div>
 
 <script>
     // --------------------------------------------------------------
-    // ДАННЫЕ ПО ПАРАМ (каждая пара отдельно) - по 2 примера и 1 задание
-    // Исправлены слова: вместо "друг" → "снег", вместо "лёд" → "след"
+    // ПАРЫ СОГЛАСНЫХ С ПРИМЕРАМИ И ЗАДАНИЯМИ
     // --------------------------------------------------------------
     const pairsData = [
         { 
-            name: "Б – П",
+            name: "б–п",
             examples: "зуб – зубы, суп – супы",
             tasks: [
                 { word: "зу_", correct: "б", hint: "зуб → зубы", image: "🦷" },
@@ -274,7 +273,7 @@
             ]
         },
         { 
-            name: "В – Ф",
+            name: "в–ф",
             examples: "жираф – жирафы, рукав – рукава",
             tasks: [
                 { word: "жира_", correct: "ф", hint: "жираф → жирафы", image: "🦒" },
@@ -283,7 +282,7 @@
             ]
         },
         { 
-            name: "Г – К",
+            name: "г–к",
             examples: "снег – снега, сапог – сапоги",
             tasks: [
                 { word: "сне_", correct: "г", hint: "снег → снега", image: "❄️" },
@@ -292,7 +291,7 @@
             ]
         },
         { 
-            name: "Д – Т",
+            name: "д–т",
             examples: "след – следы, город – города",
             tasks: [
                 { word: "сле_", correct: "д", hint: "след → следы", image: "👣" },
@@ -301,7 +300,7 @@
             ]
         },
         { 
-            name: "Ж – Ш",
+            name: "ж–ш",
             examples: "этаж – этажи, карандаш – карандаши",
             tasks: [
                 { word: "эта_", correct: "ж", hint: "этаж → этажи", image: "🏢" },
@@ -310,7 +309,7 @@
             ]
         },
         { 
-            name: "З – С",
+            name: "з–с",
             examples: "глаз – глаза, ананас – ананасы",
             tasks: [
                 { word: "гла_", correct: "з", hint: "глаз → глаза", image: "👁️" },
@@ -320,17 +319,17 @@
         }
     ];
 
-    // Вступительные слайды (исправлены: порядок примеров "зуб-зубы, глаз-глаза, суп-супы", убраны лишние точки)
+    // ВСТУПИТЕЛЬНЫЕ СЛАЙДЫ (исправлены)
     const introSlides = [
-        { title: "🧸 Здравствуй, ученик!",
-          text: "Сегодня мы будем учиться вставлять буквы в конце слов. Есть буквы, которые звучат похоже: Б–П, В–Ф, Г–К, Д–Т, Ж–Ш, З–С. Они называются парные согласные.",
+        { title: "Здравствуй, ученик!",
+          text: "Сегодня мы будем учиться вставлять буквы в конце слов. Есть буквы, которые звучат похоже: б–п, в–ф, г–к, д–т, ж–ш, з–с. Они называются парные согласные.",
           list: null },
-        { title: "🐢 Как проверить букву?",
+        { title: "Как проверить букву?",
           text: "Если ты сомневаешься, какую букву написать, измени слово так, чтобы после согласной появился гласный звук.",
-          list: ["зуб → зубы (буква Б)", "глаз → глаза (буква З)", "суп → супы (буква П)"] }
+          list: ["зуб → зубы (буква б)", "глаз → глаза (буква з)", "суп → супы (буква п)"] }
     ];
 
-    // Построение этапов: 2 вступления, затем для каждой пары: правило + 3 задания
+    // ПОСТРОЕНИЕ ЭТАПОВ
     let stages = [
         { type: "intro", index: 0 },
         { type: "intro", index: 1 }
@@ -344,7 +343,7 @@
 
     let currentStage = 0;
     let totalScore = 0;
-    let taskAnswers = {}; // ключ "pairIndex_taskIndex"
+    let taskAnswers = {};
     const maxScore = (() => {
         let cnt = 0;
         for (let st of stages) if (st.type === "task") cnt++;
@@ -360,16 +359,16 @@
         if (currentStage < stages.length) {
             const stage = stages[currentStage];
             if (stage.type === "task") {
-                let taskNum = stages.filter(s => s.type === "task").length;
                 let done = Object.keys(taskAnswers).length;
-                phaseInfoSpan.innerText = `📝 Задание ${done+1} из ${taskNum}`;
+                let total = stages.filter(s => s.type === "task").length;
+                phaseInfoSpan.innerText = `задание ${done+1} из ${total}`;
             } else if (stage.type === "pairRule") {
-                phaseInfoSpan.innerText = `📖 Правило ${stage.pairIndex+1} из ${pairsData.length}`;
+                phaseInfoSpan.innerText = `правило ${stage.pairIndex+1} из ${pairsData.length}`;
             } else if (stage.type === "intro") {
-                phaseInfoSpan.innerText = `📖 Вступление ${stage.index+1} из 2`;
+                phaseInfoSpan.innerText = `вступление ${stage.index+1} из 2`;
             }
         } else {
-            phaseInfoSpan.innerText = "🏆 Результат";
+            phaseInfoSpan.innerText = "результат";
         }
     }
 
@@ -391,13 +390,12 @@
         if (slide.list) {
             html += `<ul>${slide.list.map(item => `<li>• ${item}</li>`).join('')}</ul>`;
         }
-        html += `<button class="next-btn" id="introNextBtn">➡ ДАЛЕЕ</button></div>`;
+        html += `<button class="next-btn" id="introNextBtn">➡ дальше</button></div>`;
         contentDiv.innerHTML = html;
         document.getElementById('introNextBtn')?.addEventListener('click', () => {
             currentStage++;
             render();
         });
-        updateUI();
     }
 
     function renderPairRule(pairIndex) {
@@ -405,13 +403,13 @@
         const examplesHtml = pair.examples.split(',').map(ex => `<span class="example-item">${ex.trim()}</span>`).join('');
         const html = `
             <div class="pair-rule">
-                <h2>📖 Правило ${pair.name}</h2>
+                <h2>правило ${pair.name}</h2>
                 <div class="pair-badge">${pair.name}</div>
-                <p>Проверяй парную согласную: измени слово — один/много.</p>
+                <p>проверяй парную согласную: измени слово — один/много.</p>
                 <div class="example-list">
                     ${examplesHtml}
                 </div>
-                <button class="next-btn" id="nextRuleBtn">➡ ТРЕНИРУЕМСЯ</button>
+                <button class="next-btn" id="nextRuleBtn">➡ тренируемся</button>
             </div>
         `;
         contentDiv.innerHTML = html;
@@ -427,7 +425,8 @@
         const answerKey = `${pairIndex}_${taskIndex}`;
         const alreadyAnswered = taskAnswers[answerKey] !== undefined;
 
-        const displayWord = task.word.replace('_', '___');
+        // Показываем слово с одним подчёркиванием на месте пропуска
+        const displayWord = task.word.replace('_', '_'); // заменяем на одиночное подчёркивание
         let feedbackHtml = '';
         let disabled = false;
 
@@ -437,12 +436,11 @@
             disabled = true;
             feedbackHtml = `
                 <div class="feedback ${isCorrect ? 'correct-feedback' : 'wrong-feedback'}">
-                    ${isCorrect ? '✅ Правильно! ' + task.hint : '❌ Неверно. ' + task.hint + ' Правильная буква — ' + task.correct.toUpperCase() + '.'}
+                    ${isCorrect ? '✅ правильно! ' + task.hint : '❌ неверно. ' + task.hint + ' правильная буква — ' + task.correct.toUpperCase() + '.'}
                 </div>
             `;
         }
 
-        // Определяем неправильную букву для пары
         let wrongLetter = '';
         if (task.correct === 'б') wrongLetter = 'п';
         else if (task.correct === 'п') wrongLetter = 'б';
@@ -466,12 +464,12 @@
 
         let nextButtonHtml = '';
         if (alreadyAnswered) {
-            nextButtonHtml = `<button class="next-btn" id="nextTaskBtn">➡ ДАЛЬШЕ</button>`;
+            nextButtonHtml = `<button class="next-btn" id="nextTaskBtn">➡ дальше</button>`;
         }
 
         const html = `
             <div class="task-card">
-                <div style="font-size: 1.4rem; margin-bottom: 10px;">${task.image} Пара: ${pair.name}</div>
+                <div style="font-size: 1.4rem; margin-bottom: 10px;">${task.image} пара: ${pair.name}</div>
                 <div class="task-word">${displayWord}</div>
                 ${optionsHtml}
                 ${feedbackHtml}
@@ -510,25 +508,25 @@
         const earned = totalScore;
         let message = '';
         if (earned === maxScore) {
-            message = '🎉🎉🎉 Ты МОЛОДЕЦ! Отлично знаешь парные согласные! 🎉🎉🎉';
+            message = '🎉🎉🎉 ты молодец! отлично знаешь парные согласные! 🎉🎉🎉';
         } else if (earned >= maxScore - 20) {
-            message = '👍 Хорошо! Повтори правило и будет ещё лучше!';
+            message = '👍 хорошо! повтори правило и будет ещё лучше!';
         } else {
-            message = '📚 Попробуй пройти игру ещё раз. Вспомни, как проверять буквы: измени слово. У тебя получится!';
+            message = '📚 попробуй пройти игру ещё раз. вспомни, как проверять буквы: измени слово. у тебя получится!';
         }
         const finalHtml = `
             <div class="final-screen">
-                <h2>🏆 ТВОЙ РЕЗУЛЬТАТ</h2>
+                <h2>🏆 твой результат</h2>
                 <div class="final-score">${earned} / ${maxScore}</div>
                 <p style="font-size:1.3rem;">${message}</p>
                 <div class="bright-rules">
-                    <p>🐢 ЗАПОМНИ ПРАВИЛА</p>
-                    <p>1️⃣ Парные согласные: Б–П, В–Ф, Г–К, Д–Т, Ж–Ш, З–С.</p>
-                    <p>2️⃣ Чтобы проверить букву, измени слово: один – много (зуб – зубы).</p>
-                    <p>3️⃣ Всегда проверяй, когда сомневаешься!</p>
-                    <p>4️⃣ Тренируйся и у тебя всё получится.</p>
+                    <p>🐢 запомни правила</p>
+                    <p>1️⃣ парные согласные: б–п, в–ф, г–к, д–т, ж–ш, з–с.</p>
+                    <p>2️⃣ чтобы проверить букву, измени слово: один – много (зуб – зубы).</p>
+                    <p>3️⃣ всегда проверяй, когда сомневаешься!</p>
+                    <p>4️⃣ тренируйся и у тебя всё получится.</p>
                 </div>
-                <button class="restart-btn" id="restartGameBtn">🔄 ПРОЙТИ ЗАНОВО</button>
+                <button class="restart-btn" id="restartGameBtn">🔄 пройти заново</button>
             </div>
         `;
         contentDiv.innerHTML = finalHtml;
