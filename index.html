@@ -3,544 +3,569 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Парные согласные в конце слова | 2–3 класс | АООП вариант 7.1, 7.2</title>
+    <title>Мир насекомых · Для детей с ЗПР (7.1)</title>
+    <!-- Стили -->
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            user-select: none;
         }
         body {
-            background: #d9e6db;
-            font-family: 'Segoe UI', 'Comic Neue', 'Comic Sans MS', 'Arial', sans-serif;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #e8f5e9;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 12px;
+            margin: 0;
         }
-        .game-container {
-            max-width: 800px;
+        .app-container {
+            max-width: 900px;
             width: 100%;
-            background: #fffef7;
-            border-radius: 64px;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
-            overflow: hidden;
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 15px 30px rgba(0, 40, 0, 0.2);
+            padding: 24px 24px 32px;
+            border: 3px solid #4caf50;
+            transition: all 0.2s;
         }
-        .header {
-            background: #7fa87f;
-            padding: 20px 28px;
+        h1, h2 {
+            color: #1b5e20;
             text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        .header h1 {
+        h1 {
+            font-size: 2.3rem;
+            margin: 5px 0 10px;
+            text-shadow: 2px 2px 0 #c8e6c9;
+        }
+        h2 {
             font-size: 1.8rem;
-            color: #fff3e0;
+            margin: 15px 0 10px;
+            border-bottom: 3px dotted #81c784;
+            padding-bottom: 8px;
         }
-        .header p {
-            font-size: 1.1rem;
-            background: #fff0e0;
-            display: inline-block;
-            padding: 6px 20px;
-            border-radius: 60px;
-            font-weight: bold;
-            color: #3a6b4a;
-            margin-top: 8px;
+        .screen {
+            display: block;
         }
-        .stats {
+        .hidden {
+            display: none !important;
+        }
+        /* Слайд-зона */
+        .slide-area {
+            background: #f1f8e9;
+            border-radius: 30px;
+            padding: 20px 20px 25px;
+            margin: 10px 0 20px;
+            border: 2px solid #a5d6a7;
+            box-shadow: inset 0 0 0 2px #ffffff, 0 8px 0 #2e7d32;
+        }
+        .slide-content {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-text {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            text-align: center;
+            color: #1e3a1e;
+            margin: 15px 0;
+            font-weight: 600;
+            background: #fff9c4;
+            padding: 20px 15px;
+            border-radius: 50px;
+            border: 2px solid #f9a825;
+            width: 100%;
+            box-shadow: 0 4px 0 #b26a00;
+        }
+        .slide-icon {
+            font-size: 5rem;
+            margin: 5px 0;
+        }
+        .fact-badge {
+            background: #ffecb3;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 1.5rem;
+            border: 2px solid #ffa000;
+            color: #3e2723;
+            margin-top: 10px;
+        }
+        .nav-buttons {
             display: flex;
             justify-content: space-between;
-            background: #fef3da;
-            padding: 12px 25px;
-            font-size: 1.2rem;
+            margin-top: 25px;
+            gap: 12px;
+        }
+        button {
+            background: #4caf50;
+            border: none;
+            color: white;
             font-weight: bold;
-            color: #7fa87f;
-            border-bottom: 3px solid #c9b68b;
-        }
-        .score-box, .question-counter {
-            background: #ffffff;
-            padding: 6px 20px;
-            border-radius: 60px;
-        }
-        .content {
-            padding: 25px;
-        }
-        .intro-slide, .pair-rule {
-            background: #fffaf0;
-            border-radius: 48px;
-            padding: 25px;
-            text-align: center;
-        }
-        .intro-slide h2, .pair-rule h2 {
             font-size: 1.8rem;
-            color: #7fa87f;
-            margin-bottom: 20px;
-        }
-        .intro-slide p, .pair-rule p {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            color: #2c3e2e;
-            margin-bottom: 20px;
-        }
-        .intro-slide ul {
-            text-align: left;
-            font-size: 1.2rem;
-            padding-left: 30px;
-            margin: 20px 0;
-            list-style: none;
-        }
-        .intro-slide li {
-            margin: 12px 0;
-        }
-        .example-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 25px 0;
-        }
-        .example-item {
-            font-size: 1.5rem;
-            background: #e6f6f3;
-            padding: 12px 25px;
+            padding: 16px 30px;
             border-radius: 60px;
-            font-weight: bold;
-            color: #1e5a4a;
+            cursor: pointer;
+            box-shadow: 0 7px 0 #1b5e20;
+            transition: 0.07s;
+            border: 2px solid #a5d6a7;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+            letter-spacing: 2px;
         }
-        .pair-badge {
+        button.small-btn {
+            font-size: 1.5rem;
+            padding: 12px 20px;
+            box-shadow: 0 5px 0 #1b5e20;
+        }
+        button:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #1b5e20;
+        }
+        button:disabled {
+            opacity: 0.5;
+            transform: none;
+            box-shadow: 0 7px 0 #1b5e20;
+            pointer-events: none;
+        }
+        .speak-btn {
+            background: #ff9800;
+            box-shadow: 0 5px 0 #b85e00;
+            border-color: #ffe0b2;
+            font-size: 1.5rem;
+            padding: 10px 25px;
+            flex: 0.5;
+        }
+        .speak-btn i {
+            margin-right: 8px;
+        }
+        /* Тест */
+        .test-container {
+            background: #e1f5fe;
+            border-radius: 30px;
+            padding: 20px;
+            border: 3px solid #0288d1;
+            margin-top: 15px;
+        }
+        .question {
             font-size: 2rem;
             font-weight: bold;
-            background: #ffe0b5;
-            display: inline-block;
-            padding: 10px 35px;
-            border-radius: 80px;
-            margin: 15px 0;
-            color: #b45f1b;
-        }
-        .task-card {
-            background: #fffaf0;
-            border-radius: 60px;
-            padding: 25px;
+            color: #01579b;
+            margin-bottom: 25px;
             text-align: center;
-        }
-        .task-word {
-            font-size: 3rem;
-            font-weight: bold;
-            background: #e6f6f3;
-            padding: 30px 20px;
-            border-radius: 70px;
-            letter-spacing: 4px;
-            color: #1e5a4a;
-            margin: 20px 0;
+            background: #b3e5fc;
+            padding: 15px;
+            border-radius: 30px;
         }
         .options {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin: 30px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 25px;
         }
-        .opt-btn {
-            background: #7fa87f;
-            border: none;
-            font-size: 2.2rem;
+        .option-btn {
+            background: #ffffff;
+            color: #1e3a1e;
+            box-shadow: 0 5px 0 #78909c;
+            border: 3px solid #4fc3f7;
+            font-size: 1.6rem;
+            padding: 18px 5px;
+            border-radius: 50px;
             font-weight: bold;
-            padding: 15px 35px;
-            border-radius: 80px;
-            cursor: pointer;
-            font-family: inherit;
-            box-shadow: 0 6px 0 #3a6b4a;
-            color: white;
-            min-width: 120px;
-            transition: 0.05s linear;
+            transition: 0.1s;
+            text-align: center;
         }
-        .opt-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 3px 0 #3a6b4a;
-        }
-        .opt-btn:disabled {
-            opacity: 0.6;
-            transform: none;
-            cursor: default;
+        .option-btn.selected {
+            background: #ffd54f;
+            border: 4px solid #f57f17;
+            box-shadow: 0 3px 0 #b26a00;
+            transform: translateY(2px);
         }
         .feedback {
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.8rem;
+            padding: 10px;
+            text-align: center;
+            border-radius: 40px;
+            margin: 15px 0;
             font-weight: bold;
         }
         .correct-feedback {
-            background: #d9f0da;
-            color: #1e5a2a;
-            border-left: 10px solid #2e7d32;
+            background: #c8e6c9;
+            color: #1b5e20;
         }
         .wrong-feedback {
-            background: #ffe0e0;
-            color: #a1131e;
-            border-left: 10px solid #d32f2f;
+            background: #ffcdd2;
+            color: #b71c1c;
         }
-        .next-btn {
-            background: #f4a261;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 60px;
-            margin-top: 25px;
-            cursor: pointer;
-            font-family: inherit;
-            color: white;
-            box-shadow: 0 5px 0 #c45c2c;
+        .test-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
-        .final-screen {
-            background: #fffaf0;
-            border-radius: 60px;
-            padding: 25px;
+        .result-screen {
             text-align: center;
-        }
-        .final-screen h2 {
-            font-size: 1.8rem;
-            color: #7fa87f;
-        }
-        .final-score {
-            font-size: 2.8rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #1e5a2a;
-            background: #fef3da;
-            display: inline-block;
-            padding: 8px 30px;
-            border-radius: 60px;
-        }
-        .bright-rules {
-            background: #ffe0b5;
-            border-radius: 50px;
+            font-size: 2.5rem;
             padding: 20px;
-            margin: 20px 0;
-            text-align: left;
         }
-        .bright-rules p {
-            font-size: 1.1rem;
-            margin: 12px 0;
-            font-weight: bold;
-            color: #4a2e2a;
-        }
-        .restart-btn {
-            background: #7fa87f;
-            border: none;
-            width: 100%;
-            padding: 16px;
+        .counter {
             font-size: 1.4rem;
-            font-weight: bold;
-            border-radius: 60px;
-            cursor: pointer;
-            color: white;
+            color: #33691e;
+            text-align: right;
+            margin-bottom: 5px;
         }
-        @media (max-width: 550px) {
-            .task-word { font-size: 2rem; letter-spacing: 2px; }
-            .opt-btn { font-size: 1.6rem; padding: 10px 25px; min-width: 90px; }
-            .next-btn { font-size: 1.2rem; }
-            .example-item { font-size: 1.2rem; padding: 8px 18px; }
+        /* Картинки заменены крупными эмодзи/символами, но наглядно */
+        .img-emojii {
+            font-size: 4.5rem;
+            line-height: 1.2;
+        }
+        /* Для мобильных */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .slide-text { font-size: 1.4rem; }
+            button { font-size: 1.4rem; padding: 14px 10px; }
+            .options { grid-template-columns: 1fr; }
         }
     </style>
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-<div class="game-container" id="app">
-    <div class="header">
-        <h1>Парные согласные в конце слова</h1>
-        <p>2–3 класс · АООП вариант 7.1, 7.2</p>
+<div class="app-container" id="appContainer">
+    <h1><i class="fas fa-bug"></i> НАСЕКОМЫЕ <i class="fas fa-butterfly"></i></h1>
+    
+    <!-- ЭКРАН СЛАЙДОВ -->
+    <div id="slidesScreen">
+        <div class="counter" id="slideCounter">Слайд 1 / 13</div>
+        <div class="slide-area">
+            <div class="slide-content" id="slideContent">
+                <!-- динамически заполняется JS -->
+            </div>
+            <div style="display: flex; justify-content: center; margin: 10px 0;">
+                <button class="speak-btn" id="speakSlideBtn"><i class="fas fa-volume-up"></i> Послушать</button>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button id="prevSlideBtn" disabled><i class="fas fa-arrow-left"></i> Назад</button>
+            <button id="nextSlideBtn">Далее <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div style="text-align: center; margin-top: 25px;">
+            <button id="goToTestBtn" class="small-btn" style="background: #ffb300; box-shadow:0 5px 0 #b26a00;"><i class="fas fa-pencil-alt"></i> ПЕРЕЙТИ К ТЕСТУ</button>
+        </div>
     </div>
-    <div class="stats">
-        <div class="score-box">⭐ очки: <span id="scoreValue">0</span></div>
-        <div class="question-counter">📋 <span id="phaseInfo">вступление</span></div>
+
+    <!-- ЭКРАН ТЕСТА (изначально скрыт) -->
+    <div id="testScreen" class="hidden">
+        <h2><i class="fas fa-question-circle"></i> ПРОВЕРЬ СЕБЯ</h2>
+        <div class="test-container">
+            <div id="testHeader">
+                <span style="font-size:1.8rem; font-weight:bold;" id="questionNumDisplay">Вопрос 1 из 5</span>
+            </div>
+            <div class="question" id="questionText"></div>
+            <div class="options" id="optionsContainer"></div>
+            <div id="feedbackArea" class="feedback"></div>
+            <div class="test-nav">
+                <button id="checkAnswerBtn" class="small-btn" style="background:#0277bd; box-shadow:0 5px 0 #01416b;">✅ Проверить</button>
+                <button id="nextQuestionBtn" class="small-btn" disabled>Следующий ➡️</button>
+            </div>
+            <div style="margin-top:20px;">
+                <button id="backToSlidesFromTest" class="small-btn" style="background:#78909c; box-shadow:0 5px 0 #455a64;"><i class="fas fa-undo-alt"></i> К слайдам</button>
+            </div>
+        </div>
     </div>
-    <div class="content" id="mainContent"></div>
+
+    <!-- ЭКРАН РЕЗУЛЬТАТОВ (внутри тестового экрана, показывается после завершения) -->
+    <div id="resultScreen" class="hidden">
+        <div class="result-screen">
+            <i class="fas fa-trophy" style="font-size:5rem; color:#f9a825;"></i>
+            <h2>Ты молодец!</h2>
+            <div style="font-size:2.5rem; margin:20px 0;" id="resultMessage"></div>
+            <button id="restartLessonBtn" class="small-btn" style="background:#4caf50; box-shadow:0 7px 0 #1b5e20; margin-top:20px;"><i class="fas fa-redo-alt"></i> Посмотреть ещё раз</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // --------------------------------------------------------------
-    // ПАРЫ СОГЛАСНЫХ С ПРИМЕРАМИ И ЗАДАНИЯМИ
-    // --------------------------------------------------------------
-    const pairsData = [
-        { 
-            name: "б–п",
-            examples: "зуб – зубы, суп – супы",
-            tasks: [
-                { word: "зу_", correct: "б", hint: "зуб → зубы", image: "🦷" },
-                { word: "су_", correct: "п", hint: "суп → супы", image: "🍲" },
-                { word: "гри_", correct: "б", hint: "гриб → грибы", image: "🍄" }
-            ]
-        },
-        { 
-            name: "в–ф",
-            examples: "жираф – жирафы, рукав – рукава",
-            tasks: [
-                { word: "жира_", correct: "ф", hint: "жираф → жирафы", image: "🦒" },
-                { word: "рука_", correct: "в", hint: "рукав → рукава", image: "👕" },
-                { word: "шар_", correct: "ф", hint: "шарф → шарфы", image: "🧣" }
-            ]
-        },
-        { 
-            name: "г–к",
-            examples: "снег – снега, сапог – сапоги",
-            tasks: [
-                { word: "сне_", correct: "г", hint: "снег → снега", image: "❄️" },
-                { word: "сапо_", correct: "г", hint: "сапог → сапоги", image: "👢" },
-                { word: "вра_", correct: "г", hint: "враг → враги", image: "⚔️" }
-            ]
-        },
-        { 
-            name: "д–т",
-            examples: "след – следы, город – города",
-            tasks: [
-                { word: "сле_", correct: "д", hint: "след → следы", image: "👣" },
-                { word: "горо_", correct: "д", hint: "город → города", image: "🏙️" },
-                { word: "са_", correct: "д", hint: "сад → сады", image: "🌳" }
-            ]
-        },
-        { 
-            name: "ж–ш",
-            examples: "этаж – этажи, карандаш – карандаши",
-            tasks: [
-                { word: "эта_", correct: "ж", hint: "этаж → этажи", image: "🏢" },
-                { word: "каранда_", correct: "ш", hint: "карандаш → карандаши", image: "✏️" },
-                { word: "ё_", correct: "ж", hint: "ёж → ежи", image: "🦔" }
-            ]
-        },
-        { 
-            name: "з–с",
-            examples: "глаз – глаза, ананас – ананасы",
-            tasks: [
-                { word: "гла_", correct: "з", hint: "глаз → глаза", image: "👁️" },
-                { word: "анана_", correct: "с", hint: "ананас → ананасы", image: "🍍" },
-                { word: "арбу_", correct: "з", hint: "арбуз → арбузы", image: "🍉" }
-            ]
-        }
-    ];
+    (function(){
+        "use strict";
 
-    // ВСТУПИТЕЛЬНЫЕ СЛАЙДЫ (исправлены)
-    const introSlides = [
-        { title: "Здравствуй, ученик!",
-          text: "Сегодня мы будем учиться вставлять буквы в конце слов. Есть буквы, которые звучат похоже: б–п, в–ф, г–к, д–т, ж–ш, з–с. Они называются парные согласные.",
-          list: null },
-        { title: "Как проверить букву?",
-          text: "Если ты сомневаешься, какую букву написать, измени слово так, чтобы после согласной появился гласный звук.",
-          list: ["зуб → зубы (буква б)", "глаз → глаза (буква з)", "суп → супы (буква п)"] }
-    ];
+        // ---------- ДАННЫЕ СЛАЙДОВ (соответствуют АООП 7.1, тема "Насекомые") ----------
+        const slides = [
+            { text: "Удивительный мир насекомых", icon: "🐞🐝🦋", extra: "На Земле больше 1 миллиона видов!" },
+            { text: "Главный признак насекомых", icon: "6️⃣", extra: "У всех насекомых ШЕСТЬ ног! Запомни: 6 ног — значит, насекомое." },
+            { text: "Строение насекомого", icon: "🐜", extra: "Голова, грудь, брюшко. И 6 ножек от груди." },
+            { text: "Кто лишний?", icon: "🕷️❌", extra: "Паук — НЕ насекомое! У него 8 ног. А у жука и бабочки — 6." },
+            { text: "Бабочка", icon: "🦋🌸", extra: "Похожа на цветок. Пьёт нектар хоботком. Гусеница → куколка → бабочка." },
+            { text: "Божья коровка", icon: "🐞", extra: "Помощник садовода! Поедает тлю — маленьких вредителей." },
+            { text: "Пчела и муравей", icon: "🐝🐜", extra: "Труженики! Пчёлы делают мёд. Муравьи живут в муравейнике." },
+            { text: "Кузнечик и стрекоза", icon: "🦗🪰", extra: "Кузнечик — мастер маскировки. Стрекоза — воздушный охотник." },
+            { text: "Где живут насекомые?", icon: "🌍", extra: "Везде: в лесу, в поле, у воды, под землёй и даже дома!" },
+            { text: "Береги насекомых!", icon: "🤲❤️", extra: "Не обижай, не ломай муравейники. Наблюдай и любуйся!" },
+            { text: "Давай повторим!", icon: "🧠", extra: "Сколько ног? (6) Кто делает мёд? (пчела) Кто ест тлю? (божья коровка)" },
+            { text: "Ты готов к тесту?", icon: "📋✅", extra: "Сейчас проверим, что ты запомнил!" },
+            { text: "ПЕРЕХОДИ К ТЕСТУ", icon: "👇🔍", extra: "Нажми большую жёлтую кнопку внизу." }
+        ];
 
-    // ПОСТРОЕНИЕ ЭТАПОВ
-    let stages = [
-        { type: "intro", index: 0 },
-        { type: "intro", index: 1 }
-    ];
-    for (let pi = 0; pi < pairsData.length; pi++) {
-        stages.push({ type: "pairRule", pairIndex: pi });
-        for (let ti = 0; ti < pairsData[pi].tasks.length; ti++) {
-            stages.push({ type: "task", pairIndex: pi, taskIndex: ti });
-        }
-    }
-
-    let currentStage = 0;
-    let totalScore = 0;
-    let taskAnswers = {};
-    const maxScore = (() => {
-        let cnt = 0;
-        for (let st of stages) if (st.type === "task") cnt++;
-        return cnt * 20;
-    })();
-
-    const contentDiv = document.getElementById('mainContent');
-    const scoreSpan = document.getElementById('scoreValue');
-    const phaseInfoSpan = document.getElementById('phaseInfo');
-
-    function updateUI() {
-        scoreSpan.innerText = totalScore;
-        if (currentStage < stages.length) {
-            const stage = stages[currentStage];
-            if (stage.type === "task") {
-                let done = Object.keys(taskAnswers).length;
-                let total = stages.filter(s => s.type === "task").length;
-                phaseInfoSpan.innerText = `задание ${done+1} из ${total}`;
-            } else if (stage.type === "pairRule") {
-                phaseInfoSpan.innerText = `правило ${stage.pairIndex+1} из ${pairsData.length}`;
-            } else if (stage.type === "intro") {
-                phaseInfoSpan.innerText = `вступление ${stage.index+1} из 2`;
+        // ---------- ДАННЫЕ ТЕСТА (5 вопросов) ----------
+        const questions = [
+            {
+                question: "Кто из них — насекомое?",
+                options: ["🦋 Бабочка", "🕷️ Паук", "🐛 Червяк", "🦂 Скорпион"],
+                correct: 0
+            },
+            {
+                question: "Сколько ног у насекомых?",
+                options: ["4", "6", "8", "Много"],
+                correct: 1
+            },
+            {
+                question: "Найди части тела насекомого (выбери правильные)",
+                options: ["Голова, грудь, брюшко", "Голова, туловище, хвост", "Голова, ноги, крылья", "Только голова и брюшко"],
+                correct: 0
+            },
+            {
+                question: "Кто приносит пользу, поедая тлю?",
+                options: ["🦟 Комар", "🐞 Божья коровка", "🪰 Муха", "🐛 Гусеница"],
+                correct: 1
+            },
+            {
+                question: "Где живут насекомые?",
+                options: ["Только в лесу", "Только дома", "Только в воде", "Везде"],
+                correct: 3
             }
-        } else {
-            phaseInfoSpan.innerText = "результат";
-        }
-    }
+        ];
 
-    function render() {
-        if (currentStage >= stages.length) {
-            showFinalScreen();
-            return;
-        }
-        const stage = stages[currentStage];
-        if (stage.type === "intro") renderIntro(stage.index);
-        else if (stage.type === "pairRule") renderPairRule(stage.pairIndex);
-        else if (stage.type === "task") renderTask(stage.pairIndex, stage.taskIndex);
-        updateUI();
-    }
+        // ---------- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ----------
+        let currentSlideIndex = 0;
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null); // храним выбранный индекс
+        let testCompleted = false;
+        let selectedOption = null; // для текущего вопроса
 
-    function renderIntro(idx) {
-        const slide = introSlides[idx];
-        let html = `<div class="intro-slide"><h2>${slide.title}</h2><p>${slide.text}</p>`;
-        if (slide.list) {
-            html += `<ul>${slide.list.map(item => `<li>• ${item}</li>`).join('')}</ul>`;
-        }
-        html += `<button class="next-btn" id="introNextBtn">➡ дальше</button></div>`;
-        contentDiv.innerHTML = html;
-        document.getElementById('introNextBtn')?.addEventListener('click', () => {
-            currentStage++;
-            render();
-        });
-    }
+        // Экраны
+        const slidesScreen = document.getElementById('slidesScreen');
+        const testScreen = document.getElementById('testScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const slideContent = document.getElementById('slideContent');
+        const slideCounter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevSlideBtn');
+        const nextBtn = document.getElementById('nextSlideBtn');
+        const goToTestBtn = document.getElementById('goToTestBtn');
+        const speakSlideBtn = document.getElementById('speakSlideBtn');
+        
+        const questionText = document.getElementById('questionText');
+        const optionsDiv = document.getElementById('optionsContainer');
+        const checkBtn = document.getElementById('checkAnswerBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const feedbackArea = document.getElementById('feedbackArea');
+        const questionNumDisplay = document.getElementById('questionNumDisplay');
+        const backToSlidesFromTest = document.getElementById('backToSlidesFromTest');
+        const restartLessonBtn = document.getElementById('restartLessonBtn');
+        const resultMessage = document.getElementById('resultMessage');
 
-    function renderPairRule(pairIndex) {
-        const pair = pairsData[pairIndex];
-        const examplesHtml = pair.examples.split(',').map(ex => `<span class="example-item">${ex.trim()}</span>`).join('');
-        const html = `
-            <div class="pair-rule">
-                <h2>правило ${pair.name}</h2>
-                <div class="pair-badge">${pair.name}</div>
-                <p>проверяй парную согласную: измени слово — один/много.</p>
-                <div class="example-list">
-                    ${examplesHtml}
-                </div>
-                <button class="next-btn" id="nextRuleBtn">➡ тренируемся</button>
-            </div>
-        `;
-        contentDiv.innerHTML = html;
-        document.getElementById('nextRuleBtn')?.addEventListener('click', () => {
-            currentStage++;
-            render();
-        });
-    }
-
-    function renderTask(pairIndex, taskIndex) {
-        const pair = pairsData[pairIndex];
-        const task = pair.tasks[taskIndex];
-        const answerKey = `${pairIndex}_${taskIndex}`;
-        const alreadyAnswered = taskAnswers[answerKey] !== undefined;
-
-        // Показываем слово с одним подчёркиванием на месте пропуска
-        const displayWord = task.word.replace('_', '_'); // заменяем на одиночное подчёркивание
-        let feedbackHtml = '';
-        let disabled = false;
-
-        if (alreadyAnswered) {
-            const chosen = taskAnswers[answerKey];
-            const isCorrect = (chosen === task.correct);
-            disabled = true;
-            feedbackHtml = `
-                <div class="feedback ${isCorrect ? 'correct-feedback' : 'wrong-feedback'}">
-                    ${isCorrect ? '✅ правильно! ' + task.hint : '❌ неверно. ' + task.hint + ' правильная буква — ' + task.correct.toUpperCase() + '.'}
-                </div>
-            `;
+        // ---------- ФУНКЦИИ ДЛЯ СЛАЙДОВ ----------
+        function renderSlide(index) {
+            const slide = slides[index];
+            let html = `<div class="slide-icon img-emojii">${slide.icon}</div>`;
+            html += `<div class="slide-text">${slide.text}</div>`;
+            if (slide.extra) {
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
+            }
+            slideContent.innerHTML = html;
+            slideCounter.textContent = `Слайд ${index+1} / ${slides.length}`;
+            
+            prevBtn.disabled = (index === 0);
+            nextBtn.disabled = (index === slides.length - 1);
+            if (index === slides.length - 1) {
+                nextBtn.textContent = '🏁 Конец';
+            } else {
+                nextBtn.innerHTML = 'Далее <i class="fas fa-arrow-right"></i>';
+            }
         }
 
-        let wrongLetter = '';
-        if (task.correct === 'б') wrongLetter = 'п';
-        else if (task.correct === 'п') wrongLetter = 'б';
-        else if (task.correct === 'в') wrongLetter = 'ф';
-        else if (task.correct === 'ф') wrongLetter = 'в';
-        else if (task.correct === 'г') wrongLetter = 'к';
-        else if (task.correct === 'к') wrongLetter = 'г';
-        else if (task.correct === 'д') wrongLetter = 'т';
-        else if (task.correct === 'т') wrongLetter = 'д';
-        else if (task.correct === 'ж') wrongLetter = 'ш';
-        else if (task.correct === 'ш') wrongLetter = 'ж';
-        else if (task.correct === 'з') wrongLetter = 'с';
-        else if (task.correct === 'с') wrongLetter = 'з';
-
-        let optionsHtml = `
-            <div class="options">
-                <button class="opt-btn" data-letter="${task.correct}" ${disabled ? 'disabled' : ''}>${task.correct.toUpperCase()}</button>
-                <button class="opt-btn" data-letter="${wrongLetter}" ${disabled ? 'disabled' : ''}>${wrongLetter.toUpperCase()}</button>
-            </div>
-        `;
-
-        let nextButtonHtml = '';
-        if (alreadyAnswered) {
-            nextButtonHtml = `<button class="next-btn" id="nextTaskBtn">➡ дальше</button>`;
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                renderSlide(currentSlideIndex);
+            }
         }
 
-        const html = `
-            <div class="task-card">
-                <div style="font-size: 1.4rem; margin-bottom: 10px;">${task.image} пара: ${pair.name}</div>
-                <div class="task-word">${displayWord}</div>
-                ${optionsHtml}
-                ${feedbackHtml}
-                ${nextButtonHtml}
-            </div>
-        `;
-        contentDiv.innerHTML = html;
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                renderSlide(currentSlideIndex);
+            }
+        }
 
-        if (!alreadyAnswered) {
-            const btns = document.querySelectorAll('.opt-btn');
-            btns.forEach(btn => {
+        // Озвучка текста слайда (Web Speech API)
+        function speakSlideText() {
+            const slide = slides[currentSlideIndex];
+            let textToSpeak = slide.text + ". " + (slide.extra || "");
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'ru-RU';
+                utterance.rate = 0.9;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Озвучивание не поддерживается вашим браузером.");
+            }
+        }
+
+        // ---------- ФУНКЦИИ ТЕСТА ----------
+        function showTestScreen() {
+            slidesScreen.classList.add('hidden');
+            testScreen.classList.remove('hidden');
+            resultScreen.classList.add('hidden');
+            resetTestState();
+            renderQuestion(currentQuestionIndex);
+        }
+
+        function resetTestState() {
+            currentQuestionIndex = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            testCompleted = false;
+            selectedOption = null;
+            nextQuestionBtn.disabled = true;
+            checkBtn.disabled = false;
+            feedbackArea.innerHTML = '';
+            feedbackArea.className = 'feedback';
+        }
+
+        function renderQuestion(qIndex) {
+            const q = questions[qIndex];
+            questionText.textContent = q.question;
+            questionNumDisplay.textContent = `Вопрос ${qIndex+1} из ${questions.length}`;
+            
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                const isSelected = (userAnswers[qIndex] === idx);
+                optionsHtml += `<button class="option-btn ${isSelected ? 'selected' : ''}" data-opt-index="${idx}">${opt}</button>`;
+            });
+            optionsDiv.innerHTML = optionsHtml;
+            
+            // Если уже был ответ на этот вопрос, блокируем кнопку проверки и показываем результат
+            if (userAnswers[qIndex] !== null) {
+                checkBtn.disabled = true;
+                const isCorrect = (userAnswers[qIndex] === q.correct);
+                showFeedbackForCurrentQuestion(isCorrect);
+                nextQuestionBtn.disabled = false;
+                // выделяем правильный и неправильный? Не будем перегружать, но покажем обратную связь
+            } else {
+                checkBtn.disabled = false;
+                nextQuestionBtn.disabled = true;
+                feedbackArea.innerHTML = '';
+                feedbackArea.className = 'feedback';
+                selectedOption = null;
+            }
+            
+            // Вешаем обработчики на опции
+            document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    if (taskAnswers[answerKey] !== undefined) return;
-                    const chosen = btn.getAttribute('data-letter');
-                    taskAnswers[answerKey] = chosen;
-                    const isCorrect = (chosen === task.correct);
-                    if (isCorrect) {
-                        totalScore += 20;
-                        updateUI();
-                    }
-                    renderTask(pairIndex, taskIndex);
+                    if (userAnswers[qIndex] !== null) return; // уже ответили
+                    const optIndex = parseInt(btn.dataset.optIndex);
+                    selectedOption = optIndex;
+                    // убираем выделение у всех
+                    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
                 });
             });
-        } else {
-            const nextBtn = document.getElementById('nextTaskBtn');
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    currentStage++;
-                    render();
-                });
+        }
+
+        function showFeedbackForCurrentQuestion(isCorrect) {
+            const q = questions[currentQuestionIndex];
+            if (isCorrect) {
+                feedbackArea.innerHTML = '<i class="fas fa-check-circle"></i> Правильно! Молодец!';
+                feedbackArea.className = 'feedback correct-feedback';
+            } else {
+                const correctAns = q.options[q.correct];
+                feedbackArea.innerHTML = `<i class="fas fa-times-circle"></i> Неверно. Правильный ответ: ${correctAns}`;
+                feedbackArea.className = 'feedback wrong-feedback';
             }
         }
-    }
 
-    function showFinalScreen() {
-        const earned = totalScore;
-        let message = '';
-        if (earned === maxScore) {
-            message = '🎉🎉🎉 ты молодец! отлично знаешь парные согласные! 🎉🎉🎉';
-        } else if (earned >= maxScore - 20) {
-            message = '👍 хорошо! повтори правило и будет ещё лучше!';
-        } else {
-            message = '📚 попробуй пройти игру ещё раз. вспомни, как проверять буквы: измени слово. у тебя получится!';
+        function checkAnswer() {
+            const qIndex = currentQuestionIndex;
+            if (userAnswers[qIndex] !== null) return;
+            if (selectedOption === null) {
+                alert("Выбери ответ!");
+                return;
+            }
+            const q = questions[qIndex];
+            const isCorrect = (selectedOption === q.correct);
+            userAnswers[qIndex] = selectedOption;
+            
+            showFeedbackForCurrentQuestion(isCorrect);
+            checkBtn.disabled = true;
+            nextQuestionBtn.disabled = false;
+            
+            // подсветка (уже есть selected)
         }
-        const finalHtml = `
-            <div class="final-screen">
-                <h2>🏆 твой результат</h2>
-                <div class="final-score">${earned} / ${maxScore}</div>
-                <p style="font-size:1.3rem;">${message}</p>
-                <div class="bright-rules">
-                    <p>🐢 запомни правила</p>
-                    <p>1️⃣ парные согласные: б–п, в–ф, г–к, д–т, ж–ш, з–с.</p>
-                    <p>2️⃣ чтобы проверить букву, измени слово: один – много (зуб – зубы).</p>
-                    <p>3️⃣ всегда проверяй, когда сомневаешься!</p>
-                    <p>4️⃣ тренируйся и у тебя всё получится.</p>
-                </div>
-                <button class="restart-btn" id="restartGameBtn">🔄 пройти заново</button>
-            </div>
-        `;
-        contentDiv.innerHTML = finalHtml;
-        document.getElementById('restartGameBtn')?.addEventListener('click', () => {
-            currentStage = 0;
-            totalScore = 0;
-            taskAnswers = {};
-            render();
-            updateUI();
-        });
-    }
 
-    render();
-    updateUI();
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                selectedOption = null;
+                renderQuestion(currentQuestionIndex);
+            } else {
+                // завершить тест, показать результат
+                finishTest();
+            }
+        }
+
+        function finishTest() {
+            testScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+            const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === questions[idx].correct ? 1 : 0), 0);
+            let message = `Ты ответил правильно на ${correctCount} из ${questions.length}. `;
+            if (correctCount === questions.length) message += "Отлично! Ты всё запомнил!";
+            else if (correctCount >= 3) message += "Хорошо! Но можно повторить слайды.";
+            else message += "Давай ещё раз посмотрим слайды, и всё получится!";
+            resultMessage.textContent = message;
+        }
+
+        function goBackToSlides() {
+            testScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            slidesScreen.classList.remove('hidden');
+            // сброс слайдов не делаем, пусть остаются на том же месте, но можно перемотать?
+            // оставим текущий слайд
+        }
+
+        function restartLesson() {
+            currentSlideIndex = 0;
+            renderSlide(0);
+            slidesScreen.classList.remove('hidden');
+            testScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            resetTestState();
+        }
+
+        // ---------- ИНИЦИАЛИЗАЦИЯ И ПРИВЯЗКА СОБЫТИЙ ----------
+        function init() {
+            renderSlide(0);
+            
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            speakSlideBtn.addEventListener('click', speakSlideText);
+            goToTestBtn.addEventListener('click', showTestScreen);
+            
+            checkBtn.addEventListener('click', checkAnswer);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            backToSlidesFromTest.addEventListener('click', goBackToSlides);
+            restartLessonBtn.addEventListener('click', restartLesson);
+            
+            // дополнительно: если клик по кнопке "далее" на последнем слайде - ничего
+        }
+
+        init();
+    })();
 </script>
 </body>
 </html>
