@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Мир насекомых · Для детей с ЗПР (7.1)</title>
-    <!-- Стили -->
     <style>
         * {
             box-sizing: border-box;
@@ -54,7 +53,6 @@
         .hidden {
             display: none !important;
         }
-        /* Слайд-зона */
         .slide-area {
             background: #f1f8e9;
             border-radius: 30px;
@@ -64,7 +62,7 @@
             box-shadow: inset 0 0 0 2px #ffffff, 0 8px 0 #2e7d32;
         }
         .slide-content {
-            min-height: 300px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -97,6 +95,39 @@
             color: #3e2723;
             margin-top: 10px;
         }
+        /* Стиль для стадий бабочки */
+        .stages {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin: 20px 0 10px;
+            flex-wrap: wrap;
+        }
+        .stage-item {
+            background: #e1f5fe;
+            border-radius: 30px;
+            padding: 15px 10px;
+            min-width: 120px;
+            text-align: center;
+            border: 2px solid #0288d1;
+            box-shadow: 0 5px 0 #0277bd;
+            font-weight: bold;
+        }
+        .stage-emoji {
+            font-size: 3.5rem;
+            display: block;
+        }
+        .stage-text {
+            font-size: 1.5rem;
+            color: #01579b;
+        }
+        .arrow-symbol {
+            font-size: 3rem;
+            color: #f57c00;
+            font-weight: bold;
+        }
+
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -143,10 +174,6 @@
             padding: 10px 25px;
             flex: 0.5;
         }
-        .speak-btn i {
-            margin-right: 8px;
-        }
-        /* Тест */
         .test-container {
             background: #e1f5fe;
             border-radius: 30px;
@@ -220,20 +247,14 @@
             text-align: right;
             margin-bottom: 5px;
         }
-        /* Картинки заменены крупными эмодзи/символами, но наглядно */
-        .img-emojii {
-            font-size: 4.5rem;
-            line-height: 1.2;
-        }
-        /* Для мобильных */
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
             .slide-text { font-size: 1.4rem; }
             button { font-size: 1.4rem; padding: 14px 10px; }
             .options { grid-template-columns: 1fr; }
+            .stage-item { min-width: 90px; }
         }
     </style>
-    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -242,10 +263,10 @@
     
     <!-- ЭКРАН СЛАЙДОВ -->
     <div id="slidesScreen">
-        <div class="counter" id="slideCounter">Слайд 1 / 13</div>
+        <div class="counter" id="slideCounter">Слайд 1 / 14</div>
         <div class="slide-area">
             <div class="slide-content" id="slideContent">
-                <!-- динамически заполняется JS -->
+                <!-- динамика -->
             </div>
             <div style="display: flex; justify-content: center; margin: 10px 0;">
                 <button class="speak-btn" id="speakSlideBtn"><i class="fas fa-volume-up"></i> Послушать</button>
@@ -260,7 +281,7 @@
         </div>
     </div>
 
-    <!-- ЭКРАН ТЕСТА (изначально скрыт) -->
+    <!-- ЭКРАН ТЕСТА -->
     <div id="testScreen" class="hidden">
         <h2><i class="fas fa-question-circle"></i> ПРОВЕРЬ СЕБЯ</h2>
         <div class="test-container">
@@ -280,7 +301,7 @@
         </div>
     </div>
 
-    <!-- ЭКРАН РЕЗУЛЬТАТОВ (внутри тестового экрана, показывается после завершения) -->
+    <!-- ЭКРАН РЕЗУЛЬТАТОВ -->
     <div id="resultScreen" class="hidden">
         <div class="result-screen">
             <i class="fas fa-trophy" style="font-size:5rem; color:#f9a825;"></i>
@@ -295,24 +316,83 @@
     (function(){
         "use strict";
 
-        // ---------- ДАННЫЕ СЛАЙДОВ (соответствуют АООП 7.1, тема "Насекомые") ----------
+        // ---------- СЛАЙДЫ (теперь 14 слайдов, добавлен отдельный про цикл бабочки) ----------
         const slides = [
-            { text: "Удивительный мир насекомых", icon: "🐞🐝🦋", extra: "На Земле больше 1 миллиона видов!" },
-            { text: "Главный признак насекомых", icon: "6️⃣", extra: "У всех насекомых ШЕСТЬ ног! Запомни: 6 ног — значит, насекомое." },
-            { text: "Строение насекомого", icon: "🐜", extra: "Голова, грудь, брюшко. И 6 ножек от груди." },
-            { text: "Кто лишний?", icon: "🕷️❌", extra: "Паук — НЕ насекомое! У него 8 ног. А у жука и бабочки — 6." },
-            { text: "Бабочка", icon: "🦋🌸", extra: "Похожа на цветок. Пьёт нектар хоботком. Гусеница → куколка → бабочка." },
-            { text: "Божья коровка", icon: "🐞", extra: "Помощник садовода! Поедает тлю — маленьких вредителей." },
-            { text: "Пчела и муравей", icon: "🐝🐜", extra: "Труженики! Пчёлы делают мёд. Муравьи живут в муравейнике." },
-            { text: "Кузнечик и стрекоза", icon: "🦗🪰", extra: "Кузнечик — мастер маскировки. Стрекоза — воздушный охотник." },
-            { text: "Где живут насекомые?", icon: "🌍", extra: "Везде: в лесу, в поле, у воды, под землёй и даже дома!" },
-            { text: "Береги насекомых!", icon: "🤲❤️", extra: "Не обижай, не ломай муравейники. Наблюдай и любуйся!" },
-            { text: "Давай повторим!", icon: "🧠", extra: "Сколько ног? (6) Кто делает мёд? (пчела) Кто ест тлю? (божья коровка)" },
-            { text: "Ты готов к тесту?", icon: "📋✅", extra: "Сейчас проверим, что ты запомнил!" },
-            { text: "ПЕРЕХОДИ К ТЕСТУ", icon: "👇🔍", extra: "Нажми большую жёлтую кнопку внизу." }
+            { 
+                text: "Удивительный мир насекомых", 
+                icon: "🐞🐝🦋", 
+                extra: "На Земле больше 1 миллиона видов насекомых!" 
+            },
+            { 
+                text: "Главный признак насекомых", 
+                icon: "6️⃣", 
+                extra: "У всех насекомых ШЕСТЬ ног. Запомни: 6 ног — значит, насекомое." 
+            },
+            { 
+                text: "Строение насекомого", 
+                icon: "🐜", 
+                extra: "Голова, грудь, брюшко. И 6 ножек от груди." 
+            },
+            { 
+                text: "Кто лишний?", 
+                icon: "🕷️❌", 
+                extra: "Паук — НЕ насекомое! У него 8 ног. А у жука и бабочки — 6." 
+            },
+            { 
+                text: "Бабочка — живой цветок", 
+                icon: "🦋🌸", 
+                extra: "Пьёт сладкий нектар длинным хоботком. Очень красивая!" 
+            },
+            { 
+                // НОВЫЙ СЛАЙД: Жизненный цикл бабочки (без стрелочек в озвучке)
+                text: "Как появляется бабочка?", 
+                icon: "🐛➡️🦋", 
+                extra: "Три стадии: гусеница, куколка, бабочка.",
+                isStagesSlide: true 
+            },
+            { 
+                text: "Божья коровка", 
+                icon: "🐞", 
+                extra: "Помощник садовода! Поедает тлю — маленьких вредителей." 
+            },
+            { 
+                text: "Пчела и муравей", 
+                icon: "🐝🐜", 
+                extra: "Труженики! Пчёлы делают мёд. Муравьи живут в муравейнике." 
+            },
+            { 
+                text: "Кузнечик и стрекоза", 
+                icon: "🦗🪰", 
+                extra: "Кузнечик — мастер маскировки. Стрекоза — воздушный охотник." 
+            },
+            { 
+                text: "Где живут насекомые?", 
+                icon: "🌍", 
+                extra: "Везде: в лесу, в поле, у воды, под землёй и даже дома!" 
+            },
+            { 
+                text: "Береги насекомых!", 
+                icon: "🤲❤️", 
+                extra: "Не обижай, не ломай муравейники. Наблюдай и любуйся!" 
+            },
+            { 
+                text: "Давай повторим!", 
+                icon: "🧠", 
+                extra: "Сколько ног? (6) Кто делает мёд? (пчела) Кто ест тлю? (божья коровка)" 
+            },
+            { 
+                text: "Ты готов к тесту?", 
+                icon: "📋✅", 
+                extra: "Сейчас проверим, что ты запомнил!" 
+            },
+            { 
+                text: "ПЕРЕХОДИ К ТЕСТУ", 
+                icon: "👇🔍", 
+                extra: "Нажми большую жёлтую кнопку внизу." 
+            }
         ];
 
-        // ---------- ДАННЫЕ ТЕСТА (5 вопросов) ----------
+        // ---------- ТЕСТ (5 вопросов) ----------
         const questions = [
             {
                 question: "Кто из них — насекомое?",
@@ -325,7 +405,7 @@
                 correct: 1
             },
             {
-                question: "Найди части тела насекомого (выбери правильные)",
+                question: "Найди части тела насекомого",
                 options: ["Голова, грудь, брюшко", "Голова, туловище, хвост", "Голова, ноги, крылья", "Только голова и брюшко"],
                 correct: 0
             },
@@ -341,14 +421,12 @@
             }
         ];
 
-        // ---------- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ----------
+        // ---------- ПЕРЕМЕННЫЕ ----------
         let currentSlideIndex = 0;
         let currentQuestionIndex = 0;
-        let userAnswers = new Array(questions.length).fill(null); // храним выбранный индекс
-        let testCompleted = false;
-        let selectedOption = null; // для текущего вопроса
+        let userAnswers = new Array(questions.length).fill(null);
+        let selectedOption = null;
 
-        // Экраны
         const slidesScreen = document.getElementById('slidesScreen');
         const testScreen = document.getElementById('testScreen');
         const resultScreen = document.getElementById('resultScreen');
@@ -358,7 +436,6 @@
         const nextBtn = document.getElementById('nextSlideBtn');
         const goToTestBtn = document.getElementById('goToTestBtn');
         const speakSlideBtn = document.getElementById('speakSlideBtn');
-        
         const questionText = document.getElementById('questionText');
         const optionsDiv = document.getElementById('optionsContainer');
         const checkBtn = document.getElementById('checkAnswerBtn');
@@ -369,17 +446,31 @@
         const restartLessonBtn = document.getElementById('restartLessonBtn');
         const resultMessage = document.getElementById('resultMessage');
 
-        // ---------- ФУНКЦИИ ДЛЯ СЛАЙДОВ ----------
+        // ---------- ОТРИСОВКА СЛАЙДОВ ----------
         function renderSlide(index) {
             const slide = slides[index];
             let html = `<div class="slide-icon img-emojii">${slide.icon}</div>`;
-            html += `<div class="slide-text">${slide.text}</div>`;
-            if (slide.extra) {
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
+            
+            if (slide.isStagesSlide) {
+                // Специальное отображение для стадий бабочки
+                html += `<div class="slide-text">${slide.text}</div>`;
+                html += `<div class="stages">
+                    <div class="stage-item"><span class="stage-emoji">🐛</span><span class="stage-text">Гусеница</span></div>
+                    <div class="arrow-symbol">➡️</div>
+                    <div class="stage-item"><span class="stage-emoji">🦋🕰️</span><span class="stage-text">Куколка</span></div>
+                    <div class="arrow-symbol">➡️</div>
+                    <div class="stage-item"><span class="stage-emoji">🦋✨</span><span class="stage-text">Бабочка</span></div>
+                </div>`;
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> Сначала гусеница, потом куколка, а потом прекрасная бабочка!</div>`;
+            } else {
+                html += `<div class="slide-text">${slide.text}</div>`;
+                if (slide.extra) {
+                    html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
+                }
             }
+            
             slideContent.innerHTML = html;
             slideCounter.textContent = `Слайд ${index+1} / ${slides.length}`;
-            
             prevBtn.disabled = (index === 0);
             nextBtn.disabled = (index === slides.length - 1);
             if (index === slides.length - 1) {
@@ -403,10 +494,15 @@
             }
         }
 
-        // Озвучка текста слайда (Web Speech API)
+        // Озвучка слайда (текст без лишних символов)
         function speakSlideText() {
             const slide = slides[currentSlideIndex];
-            let textToSpeak = slide.text + ". " + (slide.extra || "");
+            let textToSpeak = slide.text + ". ";
+            if (slide.isStagesSlide) {
+                textToSpeak += "Сначала появляется гусеница. Затем она превращается в куколку. А из куколки выходит прекрасная бабочка!";
+            } else if (slide.extra) {
+                textToSpeak += slide.extra;
+            }
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(textToSpeak);
                 utterance.lang = 'ru-RU';
@@ -414,11 +510,11 @@
                 window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(utterance);
             } else {
-                alert("Озвучивание не поддерживается вашим браузером.");
+                alert("Озвучивание не поддерживается.");
             }
         }
 
-        // ---------- ФУНКЦИИ ТЕСТА ----------
+        // ---------- ТЕСТ ----------
         function showTestScreen() {
             slidesScreen.classList.add('hidden');
             testScreen.classList.remove('hidden');
@@ -430,7 +526,6 @@
         function resetTestState() {
             currentQuestionIndex = 0;
             userAnswers = new Array(questions.length).fill(null);
-            testCompleted = false;
             selectedOption = null;
             nextQuestionBtn.disabled = true;
             checkBtn.disabled = false;
@@ -442,21 +537,18 @@
             const q = questions[qIndex];
             questionText.textContent = q.question;
             questionNumDisplay.textContent = `Вопрос ${qIndex+1} из ${questions.length}`;
-            
-            let optionsHtml = '';
+            let optsHtml = '';
             q.options.forEach((opt, idx) => {
-                const isSelected = (userAnswers[qIndex] === idx);
-                optionsHtml += `<button class="option-btn ${isSelected ? 'selected' : ''}" data-opt-index="${idx}">${opt}</button>`;
+                const selectedClass = (userAnswers[qIndex] === idx) ? 'selected' : '';
+                optsHtml += `<button class="option-btn ${selectedClass}" data-opt-index="${idx}">${opt}</button>`;
             });
-            optionsDiv.innerHTML = optionsHtml;
+            optionsDiv.innerHTML = optsHtml;
             
-            // Если уже был ответ на этот вопрос, блокируем кнопку проверки и показываем результат
             if (userAnswers[qIndex] !== null) {
                 checkBtn.disabled = true;
                 const isCorrect = (userAnswers[qIndex] === q.correct);
-                showFeedbackForCurrentQuestion(isCorrect);
+                showFeedback(isCorrect);
                 nextQuestionBtn.disabled = false;
-                // выделяем правильный и неправильный? Не будем перегружать, но покажем обратную связь
             } else {
                 checkBtn.disabled = false;
                 nextQuestionBtn.disabled = true;
@@ -465,47 +557,38 @@
                 selectedOption = null;
             }
             
-            // Вешаем обработчики на опции
             document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    if (userAnswers[qIndex] !== null) return; // уже ответили
-                    const optIndex = parseInt(btn.dataset.optIndex);
-                    selectedOption = optIndex;
-                    // убираем выделение у всех
+                    if (userAnswers[qIndex] !== null) return;
+                    const idx = parseInt(btn.dataset.optIndex);
+                    selectedOption = idx;
                     document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                 });
             });
         }
 
-        function showFeedbackForCurrentQuestion(isCorrect) {
+        function showFeedback(isCorrect) {
             const q = questions[currentQuestionIndex];
             if (isCorrect) {
                 feedbackArea.innerHTML = '<i class="fas fa-check-circle"></i> Правильно! Молодец!';
                 feedbackArea.className = 'feedback correct-feedback';
             } else {
-                const correctAns = q.options[q.correct];
-                feedbackArea.innerHTML = `<i class="fas fa-times-circle"></i> Неверно. Правильный ответ: ${correctAns}`;
+                feedbackArea.innerHTML = `<i class="fas fa-times-circle"></i> Неверно. Правильный ответ: ${q.options[q.correct]}`;
                 feedbackArea.className = 'feedback wrong-feedback';
             }
         }
 
         function checkAnswer() {
-            const qIndex = currentQuestionIndex;
-            if (userAnswers[qIndex] !== null) return;
-            if (selectedOption === null) {
-                alert("Выбери ответ!");
-                return;
-            }
-            const q = questions[qIndex];
+            const qIdx = currentQuestionIndex;
+            if (userAnswers[qIdx] !== null) return;
+            if (selectedOption === null) { alert("Выбери ответ!"); return; }
+            const q = questions[qIdx];
             const isCorrect = (selectedOption === q.correct);
-            userAnswers[qIndex] = selectedOption;
-            
-            showFeedbackForCurrentQuestion(isCorrect);
+            userAnswers[qIdx] = selectedOption;
+            showFeedback(isCorrect);
             checkBtn.disabled = true;
             nextQuestionBtn.disabled = false;
-            
-            // подсветка (уже есть selected)
         }
 
         function nextQuestion() {
@@ -514,7 +597,6 @@
                 selectedOption = null;
                 renderQuestion(currentQuestionIndex);
             } else {
-                // завершить тест, показать результат
                 finishTest();
             }
         }
@@ -523,19 +605,17 @@
             testScreen.classList.add('hidden');
             resultScreen.classList.remove('hidden');
             const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === questions[idx].correct ? 1 : 0), 0);
-            let message = `Ты ответил правильно на ${correctCount} из ${questions.length}. `;
-            if (correctCount === questions.length) message += "Отлично! Ты всё запомнил!";
-            else if (correctCount >= 3) message += "Хорошо! Но можно повторить слайды.";
-            else message += "Давай ещё раз посмотрим слайды, и всё получится!";
-            resultMessage.textContent = message;
+            let msg = `Ты ответил правильно на ${correctCount} из ${questions.length}. `;
+            if (correctCount === questions.length) msg += "Отлично! Ты всё запомнил!";
+            else if (correctCount >= 3) msg += "Хорошо! Но можно повторить слайды.";
+            else msg += "Давай ещё раз посмотрим слайды, и всё получится!";
+            resultMessage.textContent = msg;
         }
 
         function goBackToSlides() {
             testScreen.classList.add('hidden');
             resultScreen.classList.add('hidden');
             slidesScreen.classList.remove('hidden');
-            // сброс слайдов не делаем, пусть остаются на том же месте, но можно перемотать?
-            // оставим текущий слайд
         }
 
         function restartLesson() {
@@ -547,23 +627,18 @@
             resetTestState();
         }
 
-        // ---------- ИНИЦИАЛИЗАЦИЯ И ПРИВЯЗКА СОБЫТИЙ ----------
+        // ---------- ИНИЦИАЛИЗАЦИЯ ----------
         function init() {
             renderSlide(0);
-            
             prevBtn.addEventListener('click', prevSlide);
             nextBtn.addEventListener('click', nextSlide);
             speakSlideBtn.addEventListener('click', speakSlideText);
             goToTestBtn.addEventListener('click', showTestScreen);
-            
             checkBtn.addEventListener('click', checkAnswer);
             nextQuestionBtn.addEventListener('click', nextQuestion);
             backToSlidesFromTest.addEventListener('click', goBackToSlides);
             restartLessonBtn.addEventListener('click', restartLesson);
-            
-            // дополнительно: если клик по кнопке "далее" на последнем слайде - ничего
         }
-
         init();
     })();
 </script>
