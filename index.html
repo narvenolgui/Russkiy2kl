@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Мир насекомых · Для детей с ЗПР (7.1)</title>
+    <title>Многообразие насекомых · 3 класс (ЗПР 7.1)</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Arial', 'Helvetica', sans-serif;
             background: #e8f5e9;
@@ -21,7 +17,7 @@
             margin: 0;
         }
         .app-container {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             background: #ffffff;
             border-radius: 40px;
@@ -36,23 +32,10 @@
             font-weight: 700;
             letter-spacing: 1px;
         }
-        h1 {
-            font-size: 2.3rem;
-            margin: 5px 0 10px;
-            text-shadow: 2px 2px 0 #c8e6c9;
-        }
-        h2 {
-            font-size: 1.8rem;
-            margin: 15px 0 10px;
-            border-bottom: 3px dotted #81c784;
-            padding-bottom: 8px;
-        }
-        .screen {
-            display: block;
-        }
-        .hidden {
-            display: none !important;
-        }
+        h1 { font-size: 2.3rem; margin: 5px 0 10px; text-shadow: 2px 2px 0 #c8e6c9; }
+        h2 { font-size: 1.8rem; margin: 15px 0 10px; border-bottom: 3px dotted #81c784; padding-bottom: 8px; }
+        .screen { display: block; }
+        .hidden { display: none !important; }
         .slide-area {
             background: #f1f8e9;
             border-radius: 30px;
@@ -82,10 +65,7 @@
             width: 100%;
             box-shadow: 0 4px 0 #b26a00;
         }
-        .slide-icon {
-            font-size: 5rem;
-            margin: 5px 0;
-        }
+        .slide-icon { font-size: 5rem; margin: 5px 0; }
         .fact-badge {
             background: #ffecb3;
             padding: 10px 20px;
@@ -95,7 +75,6 @@
             color: #3e2723;
             margin-top: 10px;
         }
-        /* Стиль для стадий бабочки */
         .stages {
             display: flex;
             justify-content: space-around;
@@ -114,20 +93,9 @@
             box-shadow: 0 5px 0 #0277bd;
             font-weight: bold;
         }
-        .stage-emoji {
-            font-size: 3.5rem;
-            display: block;
-        }
-        .stage-text {
-            font-size: 1.5rem;
-            color: #01579b;
-        }
-        .arrow-symbol {
-            font-size: 3rem;
-            color: #f57c00;
-            font-weight: bold;
-        }
-
+        .stage-emoji { font-size: 3.5rem; display: block; }
+        .stage-text { font-size: 1.5rem; color: #01579b; }
+        .arrow-symbol { font-size: 3rem; color: #f57c00; font-weight: bold; }
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -223,14 +191,8 @@
             margin: 15px 0;
             font-weight: bold;
         }
-        .correct-feedback {
-            background: #c8e6c9;
-            color: #1b5e20;
-        }
-        .wrong-feedback {
-            background: #ffcdd2;
-            color: #b71c1c;
-        }
+        .correct-feedback { background: #c8e6c9; color: #1b5e20; }
+        .wrong-feedback { background: #ffcdd2; color: #b71c1c; }
         .test-nav {
             display: flex;
             justify-content: center;
@@ -246,6 +208,22 @@
             color: #33691e;
             text-align: right;
             margin-bottom: 5px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin: 15px 0;
+        }
+        .card {
+            background: #fff9c4;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #f9a825;
+            font-size: 1.4rem;
+            font-weight: bold;
         }
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
@@ -263,11 +241,9 @@
     
     <!-- ЭКРАН СЛАЙДОВ -->
     <div id="slidesScreen">
-        <div class="counter" id="slideCounter">Слайд 1 / 14</div>
+        <div class="counter" id="slideCounter">Слайд 1 / 17</div>
         <div class="slide-area">
-            <div class="slide-content" id="slideContent">
-                <!-- динамика -->
-            </div>
+            <div class="slide-content" id="slideContent"></div>
             <div style="display: flex; justify-content: center; margin: 10px 0;">
                 <button class="speak-btn" id="speakSlideBtn"><i class="fas fa-volume-up"></i> Послушать</button>
             </div>
@@ -286,7 +262,7 @@
         <h2><i class="fas fa-question-circle"></i> ПРОВЕРЬ СЕБЯ</h2>
         <div class="test-container">
             <div id="testHeader">
-                <span style="font-size:1.8rem; font-weight:bold;" id="questionNumDisplay">Вопрос 1 из 5</span>
+                <span style="font-size:1.8rem; font-weight:bold;" id="questionNumDisplay">Вопрос 1 из 8</span>
             </div>
             <div class="question" id="questionText"></div>
             <div class="options" id="optionsContainer"></div>
@@ -305,7 +281,7 @@
     <div id="resultScreen" class="hidden">
         <div class="result-screen">
             <i class="fas fa-trophy" style="font-size:5rem; color:#f9a825;"></i>
-            <h2>Ты молодец!</h2>
+            <h2>Молодец!</h2>
             <div style="font-size:2.5rem; margin:20px 0;" id="resultMessage"></div>
             <button id="restartLessonBtn" class="small-btn" style="background:#4caf50; box-shadow:0 7px 0 #1b5e20; margin-top:20px;"><i class="fas fa-redo-alt"></i> Посмотреть ещё раз</button>
         </div>
@@ -316,108 +292,153 @@
     (function(){
         "use strict";
 
-        // ---------- СЛАЙДЫ (теперь 14 слайдов, добавлен отдельный про цикл бабочки) ----------
+        // ---------- СЛАЙДЫ (17 слайдов для 3 класса) ----------
         const slides = [
             { 
-                text: "Удивительный мир насекомых", 
+                text: "Многообразие насекомых", 
                 icon: "🐞🐝🦋", 
-                extra: "На Земле больше 1 миллиона видов насекомых!" 
+                extra: "Самая многочисленная группа животных на Земле: более 1 млн видов!",
+                isSpecial: false
             },
             { 
-                text: "Главный признак насекомых", 
-                icon: "6️⃣", 
-                extra: "У всех насекомых ШЕСТЬ ног. Запомни: 6 ног — значит, насекомое." 
+                text: "Кто такие насекомые?", 
+                icon: "🔍", 
+                extra: "У всех насекомых 6 ног. Тело состоит из трёх частей: голова, грудь, брюшко.",
+                isSpecial: false
             },
             { 
                 text: "Строение насекомого", 
                 icon: "🐜", 
-                extra: "Голова, грудь, брюшко. И 6 ножек от груди." 
-            },
-            { 
-                text: "Кто лишний?", 
-                icon: "🕷️❌", 
-                extra: "Паук — НЕ насекомое! У него 8 ног. А у жука и бабочки — 6." 
-            },
-            { 
-                text: "Бабочка — живой цветок", 
-                icon: "🦋🌸", 
-                extra: "Пьёт сладкий нектар длинным хоботком. Очень красивая!" 
-            },
-            { 
-                // НОВЫЙ СЛАЙД: Жизненный цикл бабочки (без стрелочек в озвучке)
-                text: "Как появляется бабочка?", 
-                icon: "🐛➡️🦋", 
-                extra: "Три стадии: гусеница, куколка, бабочка.",
-                isStagesSlide: true 
-            },
-            { 
-                text: "Божья коровка", 
-                icon: "🐞", 
-                extra: "Помощник садовода! Поедает тлю — маленьких вредителей." 
-            },
-            { 
-                text: "Пчела и муравей", 
-                icon: "🐝🐜", 
-                extra: "Труженики! Пчёлы делают мёд. Муравьи живут в муравейнике." 
-            },
-            { 
-                text: "Кузнечик и стрекоза", 
-                icon: "🦗🪰", 
-                extra: "Кузнечик — мастер маскировки. Стрекоза — воздушный охотник." 
+                extra: "На голове — усики и глаза. К груди крепятся 6 ног и крылья. В брюшке — органы пищеварения.",
+                isSpecial: false
             },
             { 
                 text: "Где живут насекомые?", 
                 icon: "🌍", 
-                extra: "Везде: в лесу, в поле, у воды, под землёй и даже дома!" 
+                extra: "Везде! В почве, в воде, в воздухе, в лесах, на лугах и даже в наших домах.",
+                isSpecial: false
             },
             { 
-                text: "Береги насекомых!", 
+                text: "Чем питаются насекомые?", 
+                icon: "🌿🍖", 
+                extra: "Растительноядные едят растения. Хищные охотятся на других насекомых. Всеядные едят всё.",
+                isSpecial: false
+            },
+            { 
+                text: "Растительноядные", 
+                icon: "🐛🌱", 
+                extra: "Гусеницы, тля, колорадский жук. Они питаются листьями и соком растений.",
+                isSpecial: false
+            },
+            { 
+                text: "Хищники", 
+                icon: "🐞🕷️", 
+                extra: "Божья коровка поедает тлю. Стрекоза ловит комаров. Жужелица охотится на гусениц.",
+                isSpecial: false
+            },
+            { 
+                text: "Всеядные", 
+                icon: "🐜🍂", 
+                extra: "Муравьи едят и растения, и других насекомых. Тараканы тоже всеядны.",
+                isSpecial: false
+            },
+            { 
+                text: "Жизненный цикл бабочки", 
+                icon: "🐛➡️🦋", 
+                extra: "Стадии развития: яйцо → гусеница → куколка → бабочка.",
+                isStagesSlide: true 
+            },
+            { 
+                text: "Насекомые-опылители", 
+                icon: "🐝🌸", 
+                extra: "Пчёлы, шмели, бабочки переносят пыльцу с цветка на цветок. Без них не будет плодов!",
+                isSpecial: false
+            },
+            { 
+                text: "Общественные насекомые", 
+                icon: "🐜👑", 
+                extra: "Муравьи и пчёлы живут большими семьями. У них есть королева, рабочие и солдаты.",
+                isSpecial: false
+            },
+            { 
+                text: "Насекомые-вредители", 
+                icon: "🦗⚠️", 
+                extra: "Саранча, колорадский жук, тля. Они уничтожают урожай, и люди с ними борются.",
+                isSpecial: false
+            },
+            { 
+                text: "Полезные насекомые", 
+                icon: "🐞✅", 
+                extra: "Божья коровка, златоглазка, наездник. Они поедают вредителей и защищают наши сады!",
+                isSpecial: false
+            },
+            { 
+                text: "Маскировка", 
+                icon: "🦗🌿", 
+                extra: "Многие насекомые умеют прятаться. Палочник похож на веточку, а кузнечик — на лист.",
+                isSpecial: false
+            },
+            { 
+                text: "Интересные факты", 
+                icon: "💡", 
+                extra: "Стрекоза — самый быстрый летун (до 50 км/ч). Муравей может поднять вес в 50 раз больше своего!",
+                isSpecial: false
+            },
+            { 
+                text: "Берегите насекомых!", 
                 icon: "🤲❤️", 
-                extra: "Не обижай, не ломай муравейники. Наблюдай и любуйся!" 
+                extra: "Не ловите бабочек, не разрушайте муравейники. Насекомые — важная часть природы!",
+                isSpecial: false
             },
             { 
-                text: "Давай повторим!", 
-                icon: "🧠", 
-                extra: "Сколько ног? (6) Кто делает мёд? (пчела) Кто ест тлю? (божья коровка)" 
-            },
-            { 
-                text: "Ты готов к тесту?", 
+                text: "Готовы к тесту?", 
                 icon: "📋✅", 
-                extra: "Сейчас проверим, что ты запомнил!" 
-            },
-            { 
-                text: "ПЕРЕХОДИ К ТЕСТУ", 
-                icon: "👇🔍", 
-                extra: "Нажми большую жёлтую кнопку внизу." 
+                extra: "Сейчас проверим, что вы запомнили. Нажмите жёлтую кнопку!",
+                isSpecial: false
             }
         ];
 
-        // ---------- ТЕСТ (5 вопросов) ----------
+        // ---------- ТЕСТ (8 вопросов, усложнён для 3 класса) ----------
         const questions = [
             {
-                question: "Кто из них — насекомое?",
-                options: ["🦋 Бабочка", "🕷️ Паук", "🐛 Червяк", "🦂 Скорпион"],
-                correct: 0
-            },
-            {
-                question: "Сколько ног у насекомых?",
-                options: ["4", "6", "8", "Много"],
+                question: "Сколько ног у всех насекомых?",
+                options: ["4", "6", "8", "10"],
                 correct: 1
             },
             {
-                question: "Найди части тела насекомого",
-                options: ["Голова, грудь, брюшко", "Голова, туловище, хвост", "Голова, ноги, крылья", "Только голова и брюшко"],
+                question: "Из каких частей состоит тело насекомого?",
+                options: ["Голова, грудь, брюшко", "Голова, туловище, хвост", "Голова, ноги, крылья", "Грудь, брюшко, хвост"],
                 correct: 0
             },
             {
-                question: "Кто приносит пользу, поедая тлю?",
-                options: ["🦟 Комар", "🐞 Божья коровка", "🪰 Муха", "🐛 Гусеница"],
+                question: "К какой группе по питанию относится божья коровка?",
+                options: ["Растительноядные", "Хищники", "Всеядные", "Паразиты"],
                 correct: 1
             },
             {
-                question: "Где живут насекомые?",
-                options: ["Только в лесу", "Только дома", "Только в воде", "Везде"],
-                correct: 3
+                question: "Какие насекомые живут большими семьями с королевой?",
+                options: ["Бабочки", "Муравьи и пчёлы", "Кузнечики", "Жуки"],
+                correct: 1
+            },
+            {
+                question: "Зачем нужны насекомые-опылители?",
+                options: ["Чтобы было красиво", "Они переносят пыльцу, и появляются плоды", "Они едят вредителей", "Они делают мёд"],
+                correct: 1
+            },
+            {
+                question: "Какое насекомое маскируется под веточку?",
+                options: ["Кузнечик", "Палочник", "Бабочка", "Муравей"],
+                correct: 1
+            },
+            {
+                question: "В какой последовательности развивается бабочка?",
+                options: ["Бабочка → куколка → гусеница → яйцо", "Яйцо → гусеница → куколка → бабочка", "Куколка → яйцо → гусеница → бабочка", "Гусеница → яйцо → бабочка → куколка"],
+                correct: 1
+            },
+            {
+                question: "Какое насекомое считается опасным вредителем полей?",
+                options: ["Божья коровка", "Пчела", "Саранча", "Стрекоза"],
+                correct: 2
             }
         ];
 
@@ -452,16 +473,17 @@
             let html = `<div class="slide-icon img-emojii">${slide.icon}</div>`;
             
             if (slide.isStagesSlide) {
-                // Специальное отображение для стадий бабочки
                 html += `<div class="slide-text">${slide.text}</div>`;
                 html += `<div class="stages">
+                    <div class="stage-item"><span class="stage-emoji">🥚</span><span class="stage-text">Яйцо</span></div>
+                    <div class="arrow-symbol">➡️</div>
                     <div class="stage-item"><span class="stage-emoji">🐛</span><span class="stage-text">Гусеница</span></div>
                     <div class="arrow-symbol">➡️</div>
-                    <div class="stage-item"><span class="stage-emoji">🦋🕰️</span><span class="stage-text">Куколка</span></div>
+                    <div class="stage-item"><span class="stage-emoji">🕰️</span><span class="stage-text">Куколка</span></div>
                     <div class="arrow-symbol">➡️</div>
                     <div class="stage-item"><span class="stage-emoji">🦋✨</span><span class="stage-text">Бабочка</span></div>
                 </div>`;
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> Сначала гусеница, потом куколка, а потом прекрасная бабочка!</div>`;
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> Сначала яйцо, потом гусеница, затем куколка, и наконец — прекрасная бабочка!</div>`;
             } else {
                 html += `<div class="slide-text">${slide.text}</div>`;
                 if (slide.extra) {
@@ -494,12 +516,12 @@
             }
         }
 
-        // Озвучка слайда (текст без лишних символов)
+        // Озвучка слайда
         function speakSlideText() {
             const slide = slides[currentSlideIndex];
             let textToSpeak = slide.text + ". ";
             if (slide.isStagesSlide) {
-                textToSpeak += "Сначала появляется гусеница. Затем она превращается в куколку. А из куколки выходит прекрасная бабочка!";
+                textToSpeak += "Сначала появляется яйцо. Из него вылупляется гусеница. Затем гусеница превращается в куколку. А из куколки выходит прекрасная бабочка!";
             } else if (slide.extra) {
                 textToSpeak += slide.extra;
             }
@@ -607,7 +629,7 @@
             const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === questions[idx].correct ? 1 : 0), 0);
             let msg = `Ты ответил правильно на ${correctCount} из ${questions.length}. `;
             if (correctCount === questions.length) msg += "Отлично! Ты всё запомнил!";
-            else if (correctCount >= 3) msg += "Хорошо! Но можно повторить слайды.";
+            else if (correctCount >= 5) msg += "Хорошо! Но можно повторить слайды.";
             else msg += "Давай ещё раз посмотрим слайды, и всё получится!";
             resultMessage.textContent = msg;
         }
