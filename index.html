@@ -27,7 +27,7 @@
       border: 1px solid rgba(255,255,255,0.5);
       display: flex;
       flex-direction: column;
-      height: 620px;
+      height: 680px;
       max-height: 95vh;
     }
     h1 { font-size: 1.5rem; margin-bottom: 4px; color: #0f2b57; display: flex; align-items: center; gap: 6px; }
@@ -52,7 +52,7 @@
     button.secondary { background: #4f9da6; border-bottom-color: #2c6a73; }
     .stat-card { background: #1e293b; color: white; border-radius: 16px; padding: 14px; margin: 8px 0; }
     .stat-highlight { font-size: 2rem; font-weight: 800; color: #facc15; }
-    .tool-card { background: white; border-radius: 20px; padding: 12px 14px; box-shadow: 0 4px 8px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; margin: 8px 0; }
+    .tool-card { background: white; border-radius: 20px; padding: 14px 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; margin: 8px 0; }
     .tool-title { display: flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #164a5f; }
     .quote-box { background: #e6f7f4; padding: 10px 14px; border-radius: 16px; margin: 8px 0; border-left: 5px solid #0f766e; font-size: 0.9rem; }
     .badge { background: #dbeafe; border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; font-weight: 600; color: #1e40af; }
@@ -169,14 +169,15 @@
       </div>
     </div>
 
-    <!-- ЭТАП 3: УПРАЖНЕНИЯ (5 техник) -->
+    <!-- ЭТАП 3: УПРАЖНЕНИЯ (5 техник с подробными инструкциями) -->
     <div id="step3" class="step-content">
       <div class="slide-container">
         <div class="slide active" data-slide="1">
           <div class="progress-indicator">Техника 1 из 5</div>
           <div class="tool-card">
             <div class="tool-title"><span>🟦</span> Квадратное дыхание</div>
-            <p>4 сек вдох, 4 пауза, 4 выдох, 4 пауза. Сделай 3-4 цикла.</p>
+            <p><strong>Как делать:</strong> Вдыхай носом 4 секунды, задержи дыхание на 4 секунды, выдыхай ртом 4 секунды, снова задержи на 4 секунды. Повтори 3-4 цикла.</p>
+            <p><strong>Зачем:</strong> Снижает уровень кортизола, успокаивает сердцебиение, возвращает ясность ума. Можно использовать прямо на экзамене.</p>
             <button class="complete-exercise" data-ex="1">✅ Выполнил(а) +10</button>
             <span id="ex1Badge"></span>
           </div>
@@ -185,7 +186,8 @@
           <div class="progress-indicator">Техника 2 из 5</div>
           <div class="tool-card">
             <div class="tool-title"><span>🦋</span> Объятие бабочки</div>
-            <p>Скрести руки, средние пальцы на ключицы. Постукивай поочерёдно 30-60 сек.</p>
+            <p><strong>Как делать:</strong> Скрести руки на груди, положив ладони на плечи. Средние пальцы поставь на ключицы. Поочередно легко постукивай по ключицам, создавая ритм "бабочки". Дыши ровно. Выполняй 30-60 секунд.</p>
+            <p><strong>Зачем:</strong> Двусторонняя стимуляция помогает мозгу переработать тревогу и снизить эмоциональное напряжение. Хорошо перед сном или в момент паники.</p>
             <button class="complete-exercise" data-ex="2">✅ Выполнил(а) +15</button>
             <span id="ex2Badge"></span>
           </div>
@@ -194,7 +196,8 @@
           <div class="progress-indicator">Техника 3 из 5</div>
           <div class="tool-card">
             <div class="tool-title"><span>🛑</span> Экстренный стоп-кран</div>
-            <p>Напряги всё тело на 5 сек, затем резко расслабь. Повтори 3 раза.</p>
+            <p><strong>Как делать:</strong> Сильно напряги все мышцы тела одновременно (руки, ноги, живот, лицо) на 5 секунд. Затем резко расслабь всё тело, представляя, что "выдыхаешь" напряжение. Повтори 3 раза.</p>
+            <p><strong>Зачем:</strong> Мгновенно сбрасывает физическое напряжение, "обнуляет" стрессовую реакцию организма. Идеально перед входом в аудиторию.</p>
             <button class="complete-exercise" data-ex="3">✅ Выполнил(а) +15</button>
             <span id="ex3Badge"></span>
           </div>
@@ -203,7 +206,8 @@
           <div class="progress-indicator">Техника 4 из 5</div>
           <div class="tool-card">
             <div class="tool-title"><span>⏱️</span> Ощути время</div>
-            <p>Нажми «Старт», закрой глаза, нажми «Стоп» через 20 секунд.</p>
+            <p><strong>Как делать:</strong> Нажми «Старт», закрой глаза и постарайся почувствовать, когда пройдёт ровно 20 секунд. Нажми «Стоп». Сравни результат.</p>
+            <p><strong>Зачем:</strong> Тренирует внутреннее чувство времени и осознанность, отвлекает от тревожных мыслей, помогает "заземлиться".</p>
             <div class="flex-row">
               <button id="startTimerBtn" class="secondary">⏵ Старт</button>
               <button id="stopTimerBtn" disabled>⏹ Стоп</button>
@@ -217,7 +221,8 @@
           <div class="progress-indicator">Техника 5 из 5</div>
           <div class="tool-card">
             <div class="tool-title"><span>🏝️</span> Безопасное место</div>
-            <p>Закрой глаза, представь спокойное место на 1-2 минуты.</p>
+            <p><strong>Как делать:</strong> Закрой глаза. Представь место, где тебе абсолютно спокойно и безопасно — реальное или воображаемое. Постарайся увидеть детали: цвета, предметы, свет. Услышь звуки: шум волн, пение птиц. Почувствуй запахи и температуру. Побудь там 1-2 минуты.</p>
+            <p><strong>Зачем:</strong> Мозг реагирует на воображаемый образ почти так же, как на реальный. Это быстро снижает тревогу и даёт чувство контроля.</p>
             <button class="complete-exercise" data-ex="5">✅ Выполнил(а) +10</button>
             <span id="ex5Badge"></span>
           </div>
