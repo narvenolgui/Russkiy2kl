@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>🧠 Антистресс ОГЭ // Психолог</title>
+  <title>🧠 ОГЭ: Миссия «Спокоен» | Полный тренинг</title>
   <style>
-    /* ОБЩИЕ СТИЛИ */
+    /* ----- ОБЩИЕ СТИЛИ И ПЕРЕМЕННЫЕ ----- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,7 +13,7 @@
     }
 
     body {
-      background: linear-gradient(145deg, #f5f7fe 0%, #e9eefa 100%);
+      background: linear-gradient(145deg, #f4f7fb 0%, #e9eefa 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -25,14 +25,14 @@
     }
 
     .app-card {
-      max-width: 650px;
+      max-width: 700px;
       width: 100%;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.95);
       border-radius: 48px;
-      padding: 28px 24px 32px;
+      padding: 32px 24px;
       box-shadow: 0 25px 45px -10px rgba(0,20,80,0.15), 0 8px 20px rgba(0,0,0,0.05);
       border: 1px solid rgba(255,255,255,0.5);
       transition: all 0.2s ease;
@@ -43,9 +43,9 @@
       align-items: center;
       gap: 10px;
       font-weight: 700;
-      font-size: 1.9rem;
+      font-size: 2rem;
       letter-spacing: -0.02em;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: #0f2b57;
     }
 
@@ -58,105 +58,74 @@
       padding-left: 16px;
     }
 
-    /* очки прогресса */
-    .points-panel {
-      background: #1e293b;
-      border-radius: 120px;
-      padding: 14px 20px;
-      margin-bottom: 28px;
+    /* Навигация по этапам */
+    .progress-steps {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      color: white;
-      box-shadow: 0 8px 0 #0f172a;
-    }
-
-    .points-label {
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    .points-value {
-      font-size: 2.4rem;
-      font-weight: 800;
-      line-height: 1;
-      background: #facc15;
-      color: #0f172a;
-      padding: 5px 22px;
+      margin-bottom: 30px;
+      background: #e2e8f0;
       border-radius: 60px;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+      padding: 6px;
     }
 
-    /* сетка инструментов */
-    .tools-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-
-    .tool-card {
-      background: white;
-      border-radius: 28px;
-      padding: 18px 20px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
-      border: 1px solid #e2e8f0;
-      transition: all 0.15s;
-    }
-
-    .tool-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #164a5f;
-    }
-
-    .tool-icon {
-      font-size: 1.9rem;
-    }
-
-    .breath-box {
-      background: #f1f5f9;
-      border-radius: 22px;
-      padding: 18px 12px;
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .breath-phase {
-      text-align: center;
-      min-width: 80px;
-    }
-
-    .phase-label {
-      font-size: 0.8rem;
+    .step-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 40px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #62748c;
-    }
-
-    .phase-count {
-      font-size: 3.2rem;
-      font-weight: 800;
-      font-family: 'Courier New', monospace;
-      color: #0369a1;
-      line-height: 1.2;
-    }
-
-    .small-note {
       font-size: 0.8rem;
-      color: #64748b;
-      margin-top: 5px;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .step-btn.active {
+      background: #1e293b;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Контейнеры этапов */
+    .step-content {
+      display: none;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    /* Слайды внутри этапов */
+    .slide-container {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    /* Карточки, кнопки и прочее */
+    .stat-card {
+      background: #1e293b;
+      color: white;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 20px 0;
+    }
+
+    .stat-highlight {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #facc15;
+      line-height: 1;
     }
 
     button {
@@ -164,15 +133,14 @@
       border: none;
       color: white;
       font-weight: 700;
-      padding: 14px 20px;
+      padding: 14px 24px;
       border-radius: 60px;
       font-size: 1.1rem;
       border-bottom: 4px solid #0b2a36;
       cursor: pointer;
       transition: 0.1s ease;
       box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-      width: 100%;
-      margin-top: 10px;
+      margin: 10px 5px 0 0;
       letter-spacing: 0.3px;
     }
 
@@ -194,30 +162,23 @@
       box-shadow: none;
     }
 
-    .flex-row {
+    .tool-card {
+      background: white;
+      border-radius: 28px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      margin: 20px 0;
+    }
+
+    .tool-title {
       display: flex;
+      align-items: center;
       gap: 12px;
-      margin-top: 12px;
-    }
-
-    .lemon-animation {
-      background: #fef9c3;
-      padding: 16px;
-      border-radius: 20px;
-      text-align: center;
-      font-size: 1.8rem;
-      margin: 12px 0;
-      border: 2px dashed #eab308;
-    }
-
-    .grounding-list {
-      padding-left: 20px;
-      margin: 15px 0;
-    }
-
-    .grounding-list li {
-      margin-bottom: 8px;
-      font-weight: 500;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #164a5f;
     }
 
     .quote-box {
@@ -229,9 +190,19 @@
       font-style: italic;
     }
 
-    .reset-area {
-      display: flex;
-      justify-content: flex-end;
+    .test-option {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 15px 20px;
+      margin: 12px 0;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .test-option.selected {
+      background: #dbeafe;
+      border-color: #2563eb;
     }
 
     .badge {
@@ -241,119 +212,193 @@
       font-size: 0.8rem;
       font-weight: 600;
       color: #1e40af;
+      display: inline-block;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
     }
 
     .footer-note {
-      margin-top: 24px;
+      margin-top: 30px;
       color: #6b7280;
       font-size: 0.8rem;
       text-align: center;
     }
 
-    /* адаптив */
+    /* Адаптив */
     @media (max-width: 480px) {
       .app-card { padding: 20px 16px; }
       h1 { font-size: 1.7rem; }
-      .points-value { font-size: 1.8rem; padding: 4px 18px; }
-      .phase-count { font-size: 2.5rem; }
+      .step-btn { font-size: 0.7rem; padding: 8px 6px; }
+      .stat-highlight { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 <div class="app-card">
   <h1>
-    <span>🧘</span> 
-    <span>Антистресс ОГЭ</span>
+    <span>🧘</span>
+    <span>ОГЭ: Миссия «Спокоен»</span>
   </h1>
   <div class="subhead">
-    ⚡ 9 класс • твой спокойный экзамен
+    ⚡ 9 класс • полный тренинг психологической подготовки
   </div>
 
-  <!-- панель очков (геймификация) -->
-  <div class="points-panel">
-    <span class="points-label">🧿 очки спокойствия</span>
-    <span class="points-value" id="scoreDisplay">0</span>
+  <!-- Навигация по этапам тренинга -->
+  <div class="progress-steps">
+    <button class="step-btn active" data-step="1">1. Введение</button>
+    <button class="step-btn" data-step="2">2. Тест</button>
+    <button class="step-btn" data-step="3">3. Упражнения</button>
+    <button class="step-btn" data-step="4">4. Стратегии</button>
+    <button class="step-btn" data-step="5">5. Итоги</button>
   </div>
 
-  <div class="tools-grid">
+  <!-- ЭТАП 1: ВВЕДЕНИЕ (слайды) -->
+  <div id="step1" class="step-content active">
+    <div class="slide-container">
+      <!-- Слайд 1.1 -->
+      <div class="slide active" data-slide="1">
+        <h2 style="margin-bottom: 20px;">Почему мы здесь?</h2>
+        <div class="stat-card">
+          <span class="stat-highlight">65%</span>
+          <p style="font-size: 1.2rem; margin-top: 5px;">старшеклассников постоянно переживают из-за учёбы и экзаменов.</p>
+        </div>
+        <p>Каждый третий страдает от проблем со сном и аппетитом. <strong>Стресс — это нормально, но им можно управлять!</strong></p>
+        <div class="quote-box">
+          💬 «Экзамен — это не проверка твоей личности, а всего лишь один из этапов. Ты больше, чем твои оценки.»
+        </div>
+        <button class="next-slide-btn">Дальше →</button>
+      </div>
+      <!-- Слайд 1.2 -->
+      <div class="slide" data-slide="2">
+        <h2 style="margin-bottom: 20px;">Что говорят цифры?</h2>
+        <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px;">
+          <li><strong>43%</strong> учеников считают, что стресс напрямую влияет на результат.</li>
+          <li><strong>38%</strong> выпускников сталкиваются с эмоциональным выгоранием.</li>
+          <li>Только <strong>6%</strong> обращаются за психологической помощью.</li>
+        </ul>
+        <p style="margin-top: 20px;">Сегодня мы дадим тебе инструменты, которые реально работают.</p>
+        <button class="prev-slide-btn secondary">← Назад</button>
+        <button class="next-slide-btn">Дальше →</button>
+      </div>
+      <!-- Слайд 1.3 -->
+      <div class="slide" data-slide="3">
+        <h2 style="margin-bottom: 20px;">Как устроен тренинг?</h2>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+          <div><span class="badge">Шаг 1</span> 📊 Узнаем свой уровень тревоги (тест)</div>
+          <div><span class="badge">Шаг 2</span> 🧘 Освоим 3 техники саморегуляции</div>
+          <div><span class="badge">Шаг 3</span> 🧠 Разработаем личную стратегию</div>
+          <div><span class="badge">Шаг 4</span> 🏁 Закрепим результат</div>
+        </div>
+        <p style="margin-top: 25px;">Готов? Поехали!</p>
+        <button class="prev-slide-btn secondary">← Назад</button>
+        <button class="next-slide-btn">К тесту →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЭТАП 2: ТЕСТ НА УРОВЕНЬ ТРЕВОЖНОСТИ -->
+  <div id="step2" class="step-content">
+    <h2 style="margin-bottom: 20px;">📋 Экспресс-тест: твой уровень тревоги</h2>
+    <p>Ответь на 5 вопросов. Это займёт 2 минуты.</p>
+    <div id="testContainer">
+      <!-- Вопросы будут вставлены через JS -->
+    </div>
+    <div id="testResult" style="margin: 20px 0; font-weight: 600;"></div>
+    <button id="checkTestBtn" style="display: none;">Проверить результат</button>
+    <button id="resetTestBtn" class="outline" style="margin-left: 10px;">Пройти заново</button>
+  </div>
+
+  <!-- ЭТАП 3: ПРАКТИЧЕСКИЕ УПРАЖНЕНИЯ -->
+  <div id="step3" class="step-content">
+    <h2 style="margin-bottom: 10px;">🛠️ Три техники саморегуляции</h2>
+    <p>Выполняй по порядку. После каждой — отмечай выполнение.</p>
     
-    <!-- КАРТОЧКА 1: КВАДРАТНОЕ ДЫХАНИЕ -->
+    <!-- Упражнение 1: Квадратное дыхание -->
     <div class="tool-card">
-      <div class="tool-title">
-        <span class="tool-icon">🟦</span>
-        <span>Квадратное дыхание</span>
+      <div class="tool-title"><span>🟦</span> 1. Квадратное дыхание</div>
+      <p>Снижает кортизол за 3-4 цикла. Делай прямо сейчас.</p>
+      <div style="background: #f1f5f9; border-radius: 22px; padding: 18px; margin: 15px 0; display: flex; justify-content: space-around;">
+        <div><span style="font-weight:800;">4</span> сек вдох</div>
+        <div><span style="font-weight:800;">4</span> сек пауза</div>
+        <div><span style="font-weight:800;">4</span> сек выдох</div>
+        <div><span style="font-weight:800;">4</span> сек пауза</div>
       </div>
-      <div class="breath-box" id="breathWidget">
-        <div class="breath-phase">
-          <div class="phase-label">Вдох</div>
-          <div class="phase-count" id="inhaleCount">4</div>
-        </div>
-        <div class="breath-phase">
-          <div class="phase-label">Задержка</div>
-          <div class="phase-count" id="holdCount">4</div>
-        </div>
-        <div class="breath-phase">
-          <div class="phase-label">Выдох</div>
-          <div class="phase-count" id="exhaleCount">4</div>
-        </div>
-        <div class="breath-phase">
-          <div class="phase-label">Задержка</div>
-          <div class="phase-count" id="hold2Count">4</div>
-        </div>
-      </div>
-      <p class="small-note" style="margin-top: 0;">🧘 4 сек — вдох, 4 сек — пауза, 4 сек — выдох, 4 сек — пауза. Повторяй 1-2 минуты.</p>
-      <div class="flex-row">
-        <button id="breathCompleteBtn" class="secondary">✅ Я подышал(а) +10 очков</button>
-      </div>
-      <p class="small-note" style="margin-top: 10px;">💡 На экзамене это снижает тревогу за 2 минуты.</p>
+      <button class="complete-exercise" data-ex="1">✅ Выполнил(а) +10</button>
+      <span class="ex-badge" id="ex1Badge"></span>
     </div>
 
-    <!-- КАРТОЧКА 2: ЛИМОН (мышечная релаксация) -->
+    <!-- Упражнение 2: Мышечная релаксация «Лимон» -->
     <div class="tool-card">
-      <div class="tool-title">
-        <span class="tool-icon">🍋</span>
-        <span>Упражнение «Лимон»</span>
-      </div>
-      <div class="lemon-animation" id="lemonBox">
-        <span id="lemonEmoji">🍋</span><br>
-        <span id="lemonText">Сожми лимон сильно-сильно!</span>
-      </div>
-      <button id="lemonStartBtn" class="outline">🤜 Начать сжимать (10 сек)</button>
-      <button id="lemonCompleteBtn" style="margin-top: 8px;">🍋 Расслабил(ась) +10 очков</button>
-      <p class="small-note">Сожми правую руку в кулак, представь что выжимаешь сок. Держи 5-10 сек, резко расслабь.</p>
+      <div class="tool-title"><span>🍋</span> 2. Упражнение «Лимон»</div>
+      <p>Снимает телесные зажимы. Сожми правую руку в кулак на 5-10 сек, представляя, что выжимаешь сок. Резко расслабь.</p>
+      <button id="lemonTimerBtn" class="outline">⏱️ Запустить таймер (10 сек)</button>
+      <button class="complete-exercise" data-ex="2">✅ Выполнил(а) +10</button>
+      <span class="ex-badge" id="ex2Badge"></span>
     </div>
 
-    <!-- КАРТОЧКА 3: ЗАЗЕМЛЕНИЕ 5-4-3-2-1 -->
+    <!-- Упражнение 3: Техника 5-4-3-2-1 (заземление) -->
     <div class="tool-card">
-      <div class="tool-title">
-        <span class="tool-icon">👁️</span>
-        <span>Техника «5-4-3-2-1»</span>
-      </div>
-      <p style="margin-bottom: 12px;"><strong>Прямо сейчас найди взглядом:</strong></p>
-      <ul class="grounding-list">
-        <li>🔹 5 предметов, которые видишь</li>
-        <li>🔹 4 вещи, которые можешь потрогать</li>
-        <li>🔹 3 звука, которые слышишь</li>
-        <li>🔹 2 запаха, которые чувствуешь</li>
-        <li>🔹 1 вкус (можно вспомнить)</li>
+      <div class="tool-title"><span>👁️</span> 3. Заземление «5-4-3-2-1»</div>
+      <p>Возвращает в «здесь и сейчас». Найди глазами:</p>
+      <ul style="margin: 10px 0 20px 20px;">
+        <li>5 предметов</li>
+        <li>4 вещи, которые можно потрогать</li>
+        <li>3 звука</li>
+        <li>2 запаха</li>
+        <li>1 вкус</li>
       </ul>
-      <div class="quote-box">
-        💬 «Это возвращает мозг в "здесь и сейчас" и выключает панику.»
-      </div>
-      <button id="groundingCompleteBtn">🎯 Я выполнил(а) +15 очков</button>
-      <p class="small-note">Отличный инструмент, если накрывает прямо перед кабинетом.</p>
+      <button class="complete-exercise" data-ex="3">✅ Выполнил(а) +15</button>
+      <span class="ex-badge" id="ex3Badge"></span>
     </div>
+    <p style="margin-top: 10px;"><strong>Прогресс упражнений:</strong> <span id="exProgress">0/3</span></p>
   </div>
 
-  <!-- мотивационный блок + статистика -->
-  <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0 0;">
-    <span class="badge">📊 57% старшеклассников тревожатся перед экзаменами</span>
-    <div class="reset-area">
-      <button id="resetScoreBtn" style="width: auto; padding: 10px 18px; background: #94a3b8; border-bottom-color: #475569;">🔄 Сброс</button>
+  <!-- ЭТАП 4: СТРАТЕГИИ И СОВЕТЫ -->
+  <div id="step4" class="step-content">
+    <h2 style="margin-bottom: 20px;">🧠 Личная стратегия успеха</h2>
+    <div class="tool-card">
+      <div class="tool-title"><span>📅</span> План «За 3 дня до экзамена»</div>
+      <ul style="line-height: 1.8; padding-left: 20px;">
+        <li>✅ День 1: повторение сложных тем, дыхание 3 раза в день.</li>
+        <li>✅ День 2: отдых, прогулка, визуализация успеха.</li>
+        <li>✅ День 3: лёгкое повторение, сон не менее 8 часов.</li>
+      </ul>
     </div>
+    <div class="tool-card">
+      <div class="tool-title"><span>🧘</span> Утром перед экзаменом</div>
+      <ul style="line-height: 1.8; padding-left: 20px;">
+        <li>🔹 Плотный завтрак (белок + сложные углеводы).</li>
+        <li>🔹 2 цикла «квадратного дыхания».</li>
+        <li>🔹 Позитивная установка: «Я спокоен, я готов».</li>
+      </ul>
+    </div>
+    <div class="quote-box">
+      💡 Помни: 85% успеха — это твои знания, но 43% — умение управлять стрессом. Ты владеешь обоими!
+    </div>
+    <button id="saveStrategyBtn" class="secondary">📌 Сохранить стратегию</button>
   </div>
+
+  <!-- ЭТАП 5: ИТОГИ И РЕФЛЕКСИЯ -->
+  <div id="step5" class="step-content">
+    <h2 style="margin-bottom: 20px;">🏁 Ты прошёл тренинг!</h2>
+    <div style="background: #1e293b; color: white; border-radius: 30px; padding: 25px; text-align: center;">
+      <div style="font-size: 4rem; margin-bottom: 5px;">🧿</div>
+      <div style="font-size: 2.5rem; font-weight: 800;" id="finalScore">0</div>
+      <div style="opacity: 0.9;">очков спокойствия</div>
+    </div>
+    <p style="margin: 25px 0;">Что ты возьмёшь с собой на экзамен? (запиши или запомни)</p>
+    <textarea id="reflectionNote" rows="3" style="width: 100%; padding: 15px; border-radius: 24px; border: 2px solid #e2e8f0; font-family: inherit;" placeholder="Например: дыхание по квадрату, техника 5-4-3-2-1..."></textarea>
+    <button id="finishReflectionBtn" style="margin-top: 15px;">Завершить и получить сертификат</button>
+    <div id="certMessage" style="margin-top: 20px;"></div>
+  </div>
+
   <div class="footer-note">
-    #класснаяпсихология • сделано с заботой, 2026
+    #класснаяпсихология • педагог-психолог • 2026
   </div>
 </div>
 
@@ -361,102 +406,215 @@
   (function(){
     "use strict";
 
-    // ---------- ОЧКИ (геймификация) ----------
+    // ---------- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ----------
     let calmPoints = 0;
-    const scoreSpan = document.getElementById('scoreDisplay');
+    let ex1done = false, ex2done = false, ex3done = false;
+    let testCompleted = false;
+    let currentStep = 1;
+    let currentSlide = 1;
+    const totalSlides = 3; // в этапе 1
 
-    function updateScoreDisplay() {
-      if (scoreSpan) scoreSpan.textContent = calmPoints;
+    // ---------- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----------
+    function updateExProgress() {
+      const doneCount = [ex1done, ex2done, ex3done].filter(v => v).length;
+      document.getElementById('exProgress').textContent = `${doneCount}/3`;
     }
 
-    function addPoints(points) {
-      calmPoints += points;
-      updateScoreDisplay();
+    function addPoints(p) {
+      calmPoints += p;
+      document.getElementById('finalScore').textContent = calmPoints;
     }
 
-    function resetPoints() {
-      calmPoints = 0;
-      updateScoreDisplay();
+    // Переключение этапов
+    function showStep(stepId) {
+      document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+      document.getElementById('step'+stepId).classList.add('active');
+      document.querySelectorAll('.step-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.dataset.step == stepId) btn.classList.add('active');
+      });
+      currentStep = stepId;
     }
 
-    // ---------- КВАДРАТНОЕ ДЫХАНИЕ (визуализация) ----------
-    // просто статичный текст, но кнопка даёт очки
-    document.getElementById('breathCompleteBtn').addEventListener('click', function() {
-      addPoints(10);
-      // небольшая анимация (опционально)
-      this.textContent = '✅ Отлично! +10';
-      setTimeout(() => { this.textContent = '✅ Я подышал(а) +10 очков'; }, 1200);
-    });
-
-    // ---------- ЛИМОН: таймер и интерактив ----------
-    const lemonEmoji = document.getElementById('lemonEmoji');
-    const lemonText = document.getElementById('lemonText');
-    const lemonStartBtn = document.getElementById('lemonStartBtn');
-    const lemonCompleteBtn = document.getElementById('lemonCompleteBtn');
-
-    let lemonTimer = null;
-    let lemonActive = false;
-
-    function resetLemonUI() {
-      if (lemonTimer) clearTimeout(lemonTimer);
-      lemonActive = false;
-      lemonEmoji.textContent = '🍋';
-      lemonText.textContent = 'Сожми лимон сильно-сильно!';
-      lemonStartBtn.textContent = '🤜 Начать сжимать (10 сек)';
-      lemonStartBtn.disabled = false;
+    // Навигация по слайдам (этап 1)
+    function showSlide(slideNum) {
+      const slides = document.querySelectorAll('#step1 .slide');
+      slides.forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`#step1 .slide[data-slide="${slideNum}"]`);
+      if(target) target.classList.add('active');
+      currentSlide = slideNum;
     }
 
-    lemonStartBtn.addEventListener('click', function() {
-      if (lemonActive) return;
-      lemonActive = true;
-      lemonStartBtn.disabled = true;
-      lemonStartBtn.textContent = '⚡ Сжимаем...';
-      lemonEmoji.textContent = '💪🍋';
-      lemonText.textContent = 'Держи напряжение! Ещё чуть-чуть...';
+    // ---------- ИНИЦИАЛИЗАЦИЯ ТЕСТА ----------
+    const testQuestions = [
+      { text: "Волнуешься ли ты, когда учитель говорит о проверочной работе?", options: ["Да", "Скорее да", "Скорее нет", "Нет"] },
+      { text: "Беспокоишься ли ты о том, хорошо ли справился с заданием?", options: ["Да", "Скорее да", "Скорее нет", "Нет"] },
+      { text: "Мечтаешь ли ты о том, чтобы поменьше волноваться при ответах?", options: ["Да", "Скорее да", "Скорее нет", "Нет"] },
+      { text: "Бывает ли, что от волнения забываешь знакомый материал?", options: ["Да", "Скорее да", "Скорее нет", "Нет"] },
+      { text: "Чувствуешь ли ты дрожь в руках перед контрольной?", options: ["Да", "Скорее да", "Скорее нет", "Нет"] }
+    ];
 
-      lemonTimer = setTimeout(() => {
-        lemonEmoji.textContent = '😮‍💨🍋';
-        lemonText.textContent = 'Резко расслабь руку! Почувствуй разницу.';
-        lemonStartBtn.textContent = '✅ Упражнение завершено';
-        lemonActive = false;
-        lemonStartBtn.disabled = false;
-        // Очки даём только по кнопке завершения
-      }, 10000); // 10 секунд
-    });
+    function renderTest() {
+      const container = document.getElementById('testContainer');
+      container.innerHTML = '';
+      testQuestions.forEach((q, idx) => {
+        const qDiv = document.createElement('div');
+        qDiv.classList.add('tool-card');
+        qDiv.style.marginBottom = '15px';
+        qDiv.innerHTML = `<p style="font-weight:600; margin-bottom:12px;">${idx+1}. ${q.text}</p>`;
+        const optsDiv = document.createElement('div');
+        optsDiv.style.display = 'flex';
+        optsDiv.style.flexWrap = 'wrap';
+        optsDiv.style.gap = '8px';
+        q.options.forEach((opt, optIdx) => {
+          const optBtn = document.createElement('button');
+          optBtn.textContent = opt;
+          optBtn.style.padding = '10px 16px';
+          optBtn.style.background = '#f1f5f9';
+          optBtn.style.color = '#1e293b';
+          optBtn.style.border = 'none';
+          optBtn.style.borderRadius = '40px';
+          optBtn.style.fontSize = '0.9rem';
+          optBtn.dataset.q = idx;
+          optBtn.dataset.score = optIdx; // 0: Да(3 балла), 1: Скорее да(2), 2: Скорее нет(1), 3: Нет(0)
+          optBtn.addEventListener('click', function(e) {
+            const parent = this.parentNode;
+            parent.querySelectorAll('button').forEach(b => {
+              b.style.background = '#f1f5f9';
+              b.style.color = '#1e293b';
+            });
+            this.style.background = '#164a5f';
+            this.style.color = 'white';
+            // сохраняем выбор
+            parent.dataset.selected = this.dataset.score;
+          });
+          optsDiv.appendChild(optBtn);
+        });
+        qDiv.appendChild(optsDiv);
+        container.appendChild(qDiv);
+      });
+      document.getElementById('checkTestBtn').style.display = 'inline-block';
+    }
 
-    lemonCompleteBtn.addEventListener('click', function() {
-      if (lemonActive) {
-        // если таймер ещё идёт, сбросим его
-        clearTimeout(lemonTimer);
-        lemonActive = false;
-        lemonStartBtn.disabled = false;
-        lemonStartBtn.textContent = '🤜 Начать сжимать (10 сек)';
-        lemonEmoji.textContent = '🍋';
-        lemonText.textContent = 'Сожми лимон сильно-сильно!';
-      }
-      addPoints(10);
-      lemonCompleteBtn.textContent = '🍋 +10 (расслабление)';
-      setTimeout(() => { lemonCompleteBtn.textContent = '🍋 Расслабил(ась) +10 очков'; }, 1200);
-    });
+    function calculateTestResult() {
+      let totalScore = 0;
+      const containers = document.querySelectorAll('#testContainer .tool-card');
+      containers.forEach(card => {
+        const optsDiv = card.querySelector('div');
+        const selected = optsDiv.dataset.selected;
+        if(selected !== undefined) {
+          totalScore += (3 - parseInt(selected)); // пересчёт: Да=3, Скорее да=2, Скорее нет=1, Нет=0
+        }
+      });
+      const maxScore = testQuestions.length * 3;
+      const percent = Math.round((totalScore / maxScore) * 100);
+      let message = '';
+      if(percent >= 70) message = 'Высокий уровень тревожности. Рекомендуется активно использовать техники саморегуляции.';
+      else if(percent >= 40) message = 'Средний уровень тревожности. Техники помогут чувствовать себя увереннее.';
+      else message = 'Низкий уровень тревожности. Ты уже хорошо справляешься, но техники всё равно пригодятся.';
+      document.getElementById('testResult').innerHTML = `Ваш результат: ${percent}% тревожности. ${message}`;
+      testCompleted = true;
+      addPoints(20); // бонус за прохождение теста
+    }
 
-    // ---------- ТЕХНИКА 5-4-3-2-1 ----------
-    document.getElementById('groundingCompleteBtn').addEventListener('click', function() {
-      addPoints(15);
-      this.textContent = '🎯 Супер! +15 очков';
-      setTimeout(() => { this.textContent = '🎯 Я выполнил(а) +15 очков'; }, 1500);
-    });
+    // ---------- ОБРАБОТЧИКИ СОБЫТИЙ ----------
+    document.addEventListener('DOMContentLoaded', function() {
+      renderTest();
+      updateExProgress();
 
-    // ---------- СБРОС ОЧКОВ ----------
-    document.getElementById('resetScoreBtn').addEventListener('click', function() {
-      resetPoints();
-    });
+      // Кнопки этапов
+      document.querySelectorAll('.step-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const step = this.dataset.step;
+          showStep(step);
+        });
+      });
 
-    // инициализация
-    updateScoreDisplay();
+      // Навигация по слайдам (Этап 1)
+      document.querySelectorAll('.next-slide-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if(currentSlide < totalSlides) {
+            showSlide(currentSlide + 1);
+          } else {
+            // если последний слайд, переходим к этапу 2
+            showStep(2);
+          }
+        });
+      });
+      document.querySelectorAll('.prev-slide-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          if(currentSlide > 1) showSlide(currentSlide - 1);
+        });
+      });
 
-    // доп. безопасность: если пользователь уходит со страницы, таймер всё равно очистится
-    window.addEventListener('beforeunload', function() {
-      if (lemonTimer) clearTimeout(lemonTimer);
+      // Тест: проверка
+      document.getElementById('checkTestBtn').addEventListener('click', function() {
+        calculateTestResult();
+        this.style.display = 'none';
+      });
+      document.getElementById('resetTestBtn').addEventListener('click', function() {
+        renderTest();
+        document.getElementById('testResult').innerHTML = '';
+        document.getElementById('checkTestBtn').style.display = 'inline-block';
+      });
+
+      // Упражнения
+      document.querySelectorAll('.complete-exercise').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const ex = this.dataset.ex;
+          if(ex === '1' && !ex1done) {
+            ex1done = true;
+            addPoints(10);
+            document.getElementById('ex1Badge').textContent = ' ✅';
+          } else if(ex === '2' && !ex2done) {
+            ex2done = true;
+            addPoints(10);
+            document.getElementById('ex2Badge').textContent = ' ✅';
+          } else if(ex === '3' && !ex3done) {
+            ex3done = true;
+            addPoints(15);
+            document.getElementById('ex3Badge').textContent = ' ✅';
+          }
+          updateExProgress();
+          this.disabled = true;
+          this.style.opacity = '0.6';
+        });
+      });
+
+      // Таймер для лимона
+      document.getElementById('lemonTimerBtn').addEventListener('click', function() {
+        this.textContent = '⏳ Сжимаем... (10 сек)';
+        this.disabled = true;
+        setTimeout(() => {
+          this.textContent = '🍋 Расслабь!';
+          setTimeout(() => {
+            this.textContent = '⏱️ Запустить таймер (10 сек)';
+            this.disabled = false;
+          }, 2000);
+        }, 10000);
+      });
+
+      // Сохранение стратегии
+      document.getElementById('saveStrategyBtn').addEventListener('click', function() {
+        addPoints(15);
+        this.textContent = '✅ Стратегия сохранена!';
+        this.disabled = true;
+      });
+
+      // Завершение
+      document.getElementById('finishReflectionBtn').addEventListener('click', function() {
+        const note = document.getElementById('reflectionNote').value;
+        const msgDiv = document.getElementById('certMessage');
+        if(note.trim() !== '') {
+          msgDiv.innerHTML = '<div style="background:#e6f7e6; padding:20px; border-radius:24px;">🎓 Поздравляем! Ты успешно прошёл тренинг «Миссия Спокоен». Твои инструменты: ' + note + '. Удачи на ОГЭ!</div>';
+          addPoints(25);
+        } else {
+          msgDiv.innerHTML = '<div style="background:#fef9c3; padding:20px; border-radius:24px;">📝 Запиши хотя бы одну технику, чтобы закрепить результат.</div>';
+        }
+      });
+
+      // Обновление счета
+      document.getElementById('finalScore').textContent = calmPoints;
     });
 
   })();
