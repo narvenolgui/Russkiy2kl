@@ -56,10 +56,27 @@
     .subhead {
       font-size: 1rem;
       color: #475569;
-      margin-bottom: 24px;
+      margin-bottom: 15px;
       font-weight: 500;
       border-left: 5px solid #4f9da6;
       padding-left: 16px;
+    }
+
+    /* Живой счётчик очков */
+    .live-score-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    .live-score-badge {
+      background: #facc15;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #0f172a;
+      box-shadow: 0 4px 0 #b45309;
+      font-size: 1.1rem;
+      transition: transform 0.1s ease;
     }
 
     /* Контейнер для контента */
@@ -189,17 +206,6 @@
       align-items: center;
     }
 
-    .timer-display {
-      font-size: 2rem;
-      font-weight: 800;
-      font-family: monospace;
-      background: #1e293b;
-      color: #facc15;
-      padding: 8px 16px;
-      border-radius: 20px;
-      display: inline-block;
-    }
-
     .footer-note {
       margin-top: 30px;
       color: #6b7280;
@@ -226,13 +232,35 @@
     ⚡ 9 класс • полный тренинг психологической подготовки
   </div>
 
+  <!-- Живой счётчик очков (всегда на виду) -->
+  <div class="live-score-container">
+    <div class="live-score-badge">
+      🧿 Очки спокойствия: <span id="liveScore">0</span>
+    </div>
+  </div>
+
   <!-- Основной контейнер для этапов -->
   <div class="content-area">
     <!-- ЭТАП 1: ВВЕДЕНИЕ (слайды) -->
     <div id="step1" class="step-content active">
       <div class="slide-container">
-        <!-- Слайд 1.1 -->
+        <!-- Слайд 1.1 (Новый! О влиянии стресса на мозг) -->
         <div class="slide active" data-slide="1">
+          <h2 style="margin-bottom: 20px;">🧠 Стресс и мозг: что происходит?</h2>
+          <div style="background: #e0f2fe; border-radius: 24px; padding: 20px; margin-bottom: 20px;">
+            <p style="font-size: 1.2rem; margin-bottom: 15px;"><strong>Когда ты волнуешься, в кровь выбрасывается кортизол.</strong></p>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+              <li>❌ <strong>Ухудшается память</strong> — сложнее вспомнить то, что учил.</li>
+              <li>❌ <strong>Снижается концентрация</strong> — легко отвлечься на посторонние мысли.</li>
+              <li>❌ <strong>«Туннельное мышление»</strong> — трудно найти нестандартное решение.</li>
+            </ul>
+          </div>
+          <div class="quote-box">
+            💡 <strong>Главный секрет:</strong> Управляя стрессом, ты буквально «включаешь» свой мозг на полную мощность. Сегодня ты научишься это делать.
+          </div>
+        </div>
+        <!-- Слайд 1.2 -->
+        <div class="slide" data-slide="2">
           <h2 style="margin-bottom: 20px;">Почему мы здесь?</h2>
           <div class="stat-card">
             <span class="stat-highlight">65%</span>
@@ -243,8 +271,8 @@
             💬 «Экзамен — это не проверка твоей личности, а всего лишь один из этапов. Ты больше, чем твои оценки.»
           </div>
         </div>
-        <!-- Слайд 1.2 -->
-        <div class="slide" data-slide="2">
+        <!-- Слайд 1.3 -->
+        <div class="slide" data-slide="3">
           <h2 style="margin-bottom: 20px;">Что говорят цифры?</h2>
           <ul style="font-size: 1.1rem; line-height: 1.8; padding-left: 20px;">
             <li><strong>43%</strong> учеников считают, что стресс напрямую влияет на результат.</li>
@@ -253,8 +281,8 @@
           </ul>
           <p style="margin-top: 20px;">Сегодня мы дадим тебе инструменты, которые реально работают.</p>
         </div>
-        <!-- Слайд 1.3 -->
-        <div class="slide" data-slide="3">
+        <!-- Слайд 1.4 -->
+        <div class="slide" data-slide="4">
           <h2 style="margin-bottom: 20px;">Как устроен тренинг?</h2>
           <div style="display: flex; flex-direction: column; gap: 15px;">
             <div><span class="badge">Шаг 1</span> 📊 Узнаем свой уровень тревоги (тест)</div>
@@ -408,7 +436,19 @@
 
     function addPoints(p) {
       calmPoints += p;
-      document.getElementById('finalScore').textContent = calmPoints;
+      // Обновляем финальный счётчик
+      const finalScoreSpan = document.getElementById('finalScore');
+      if (finalScoreSpan) finalScoreSpan.textContent = calmPoints;
+      // Обновляем живой счётчик
+      const liveScoreSpan = document.getElementById('liveScore');
+      if (liveScoreSpan) liveScoreSpan.textContent = calmPoints;
+      
+      // Небольшая анимация для живого счётчика
+      const badge = document.querySelector('.live-score-badge');
+      if (badge) {
+        badge.style.transform = 'scale(1.05)';
+        setTimeout(() => badge.style.transform = 'scale(1)', 100);
+      }
     }
 
     function showStep(stepId) {
@@ -551,6 +591,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       renderTest();
       updateExProgress();
+      addPoints(0); // Чтобы синхронизировать счётчики при старте
 
       // Кнопки навигации
       document.getElementById('nextBtn').addEventListener('click', function() {
@@ -558,7 +599,7 @@
           // Внутри этапа 1: переключение слайдов
           const activeSlide = document.querySelector('#step1 .slide.active');
           const currentSlideNum = parseInt(activeSlide.dataset.slide);
-          if (currentSlideNum < 3) {
+          if (currentSlideNum < 4) {
             showSlide(currentSlideNum + 1);
           } else {
             nextStep();
@@ -664,7 +705,7 @@
         }
       });
 
-      // Инициализация
+      // Инициализация финального счётчика
       document.getElementById('finalScore').textContent = calmPoints;
     });
 
