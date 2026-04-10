@@ -1,691 +1,465 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Звёзды и планеты · 3 класс (ЗПР 7.1)</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
-            background: #0d1b2a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 12px;
-            margin: 0;
-        }
-        .app-container {
-            max-width: 950px;
-            width: 100%;
-            background: #1b263b;
-            border-radius: 40px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            padding: 24px 24px 32px;
-            border: 3px solid #415a77;
-            transition: all 0.2s;
-        }
-        h1, h2 {
-            color: #e0aaff;
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        h1 { font-size: 2.3rem; margin: 5px 0 10px; text-shadow: 2px 2px 0 #3c096c; }
-        h2 { font-size: 1.8rem; margin: 15px 0 10px; border-bottom: 3px dotted #9d4edd; padding-bottom: 8px; }
-        .screen { display: block; }
-        .hidden { display: none !important; }
-        .slide-area {
-            background: #2c3e50;
-            border-radius: 30px;
-            padding: 20px 20px 25px;
-            margin: 10px 0 20px;
-            border: 2px solid #5a189a;
-            box-shadow: inset 0 0 0 2px #1b263b, 0 8px 0 #240046;
-        }
-        .slide-content {
-            min-height: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .slide-text {
-            font-size: 1.8rem;
-            line-height: 1.4;
-            text-align: center;
-            color: #ffea00;
-            margin: 15px 0;
-            font-weight: 600;
-            background: #3c096c;
-            padding: 20px 15px;
-            border-radius: 50px;
-            border: 2px solid #e0aaff;
-            width: 100%;
-            box-shadow: 0 4px 0 #240046;
-        }
-        .slide-icon { font-size: 5rem; margin: 5px 0; }
-        .fact-badge {
-            background: #5a189a;
-            padding: 10px 20px;
-            border-radius: 40px;
-            font-size: 1.5rem;
-            border: 2px solid #e0aaff;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-        .stages {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            margin: 20px 0 10px;
-            flex-wrap: wrap;
-        }
-        .stage-item {
-            background: #240046;
-            border-radius: 30px;
-            padding: 15px 10px;
-            min-width: 120px;
-            text-align: center;
-            border: 2px solid #9d4edd;
-            box-shadow: 0 5px 0 #3c096c;
-            font-weight: bold;
-        }
-        .stage-emoji { font-size: 3.5rem; display: block; }
-        .stage-text { font-size: 1.5rem; color: #e0aaff; }
-        .arrow-symbol { font-size: 3rem; color: #ffea00; font-weight: bold; }
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-            gap: 12px;
-        }
-        button {
-            background: #9d4edd;
-            border: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1.8rem;
-            padding: 16px 30px;
-            border-radius: 60px;
-            cursor: pointer;
-            box-shadow: 0 7px 0 #5a189a;
-            transition: 0.07s;
-            border: 2px solid #c77dff;
-            flex: 1;
-            text-align: center;
-            min-width: 120px;
-            letter-spacing: 2px;
-        }
-        button.small-btn {
-            font-size: 1.5rem;
-            padding: 12px 20px;
-            box-shadow: 0 5px 0 #5a189a;
-        }
-        button:active {
-            transform: translateY(5px);
-            box-shadow: 0 2px 0 #5a189a;
-        }
-        button:disabled {
-            opacity: 0.5;
-            transform: none;
-            box-shadow: 0 7px 0 #5a189a;
-            pointer-events: none;
-        }
-        .speak-btn {
-            background: #e07a5f;
-            box-shadow: 0 5px 0 #9e2a2b;
-            border-color: #ffb5a7;
-            font-size: 1.5rem;
-            padding: 10px 25px;
-            flex: 0.5;
-        }
-        .test-container {
-            background: #1b263b;
-            border-radius: 30px;
-            padding: 20px;
-            border: 3px solid #9d4edd;
-            margin-top: 15px;
-        }
-        .question {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ffea00;
-            margin-bottom: 25px;
-            text-align: center;
-            background: #3c096c;
-            padding: 15px;
-            border-radius: 30px;
-        }
-        .options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 25px;
-        }
-        .option-btn {
-            background: #2c3e50;
-            color: #ffffff;
-            box-shadow: 0 5px 0 #1b263b;
-            border: 3px solid #9d4edd;
-            font-size: 1.6rem;
-            padding: 18px 5px;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: 0.1s;
-            text-align: center;
-        }
-        .option-btn.selected {
-            background: #ffb703;
-            color: #000000;
-            border: 4px solid #ffea00;
-            box-shadow: 0 3px 0 #e85d04;
-            transform: translateY(2px);
-        }
-        .feedback {
-            font-size: 1.8rem;
-            padding: 10px;
-            text-align: center;
-            border-radius: 40px;
-            margin: 15px 0;
-            font-weight: bold;
-        }
-        .correct-feedback { background: #2d6a4f; color: #ffffff; }
-        .wrong-feedback { background: #ba1826; color: #ffffff; }
-        .test-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .result-screen {
-            text-align: center;
-            font-size: 2.5rem;
-            padding: 20px;
-            color: #e0aaff;
-        }
-        .counter {
-            font-size: 1.4rem;
-            color: #c77dff;
-            text-align: right;
-            margin-bottom: 5px;
-        }
-        .planet-list {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            width: 100%;
-            margin: 15px 0;
-        }
-        .planet-card {
-            background: #240046;
-            border-radius: 15px;
-            padding: 10px 5px;
-            text-align: center;
-            border: 2px solid #9d4edd;
-            color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .constellation-box {
-            background: #1b263b;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 15px 0;
-            text-align: center;
-            border: 3px dashed #ffea00;
-        }
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .slide-text { font-size: 1.4rem; }
-            button { font-size: 1.4rem; padding: 14px 10px; }
-            .options { grid-template-columns: 1fr; }
-            .stage-item { min-width: 90px; }
-            .planet-list { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>🧠 Антистресс ОГЭ // Психолог</title>
+  <style>
+    /* ОБЩИЕ СТИЛИ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f5f7fe 0%, #e9eefa 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+      padding: 16px;
+      margin: 0;
+      color: #1e293b;
+    }
+
+    .app-card {
+      max-width: 650px;
+      width: 100%;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.85);
+      border-radius: 48px;
+      padding: 28px 24px 32px;
+      box-shadow: 0 25px 45px -10px rgba(0,20,80,0.15), 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: all 0.2s ease;
+    }
+
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: #0f2b57;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #475569;
+      margin-bottom: 24px;
+      font-weight: 500;
+      border-left: 5px solid #4f9da6;
+      padding-left: 16px;
+    }
+
+    /* очки прогресса */
+    .points-panel {
+      background: #1e293b;
+      border-radius: 120px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      box-shadow: 0 8px 0 #0f172a;
+    }
+
+    .points-label {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .points-value {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1;
+      background: #facc15;
+      color: #0f172a;
+      padding: 5px 22px;
+      border-radius: 60px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* сетка инструментов */
+    .tools-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .tool-card {
+      background: white;
+      border-radius: 28px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.03);
+      border: 1px solid #e2e8f0;
+      transition: all 0.15s;
+    }
+
+    .tool-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #164a5f;
+    }
+
+    .tool-icon {
+      font-size: 1.9rem;
+    }
+
+    .breath-box {
+      background: #f1f5f9;
+      border-radius: 22px;
+      padding: 18px 12px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .breath-phase {
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .phase-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #62748c;
+    }
+
+    .phase-count {
+      font-size: 3.2rem;
+      font-weight: 800;
+      font-family: 'Courier New', monospace;
+      color: #0369a1;
+      line-height: 1.2;
+    }
+
+    .small-note {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 5px;
+    }
+
+    button {
+      background: #164a5f;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 14px 20px;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      border-bottom: 4px solid #0b2a36;
+      cursor: pointer;
+      transition: 0.1s ease;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+      width: 100%;
+      margin-top: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    button.secondary {
+      background: #4f9da6;
+      border-bottom-color: #2c6a73;
+    }
+
+    button.outline {
+      background: transparent;
+      color: #164a5f;
+      border: 2px solid #bdd3da;
+      border-bottom-width: 4px;
+      box-shadow: none;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .lemon-animation {
+      background: #fef9c3;
+      padding: 16px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 12px 0;
+      border: 2px dashed #eab308;
+    }
+
+    .grounding-list {
+      padding-left: 20px;
+      margin: 15px 0;
+    }
+
+    .grounding-list li {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .quote-box {
+      background: #e6f7f4;
+      padding: 16px 18px;
+      border-radius: 24px;
+      margin: 16px 0;
+      border-left: 6px solid #0f766e;
+      font-style: italic;
+    }
+
+    .reset-area {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      background: #dbeafe;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e40af;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: #6b7280;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    /* адаптив */
+    @media (max-width: 480px) {
+      .app-card { padding: 20px 16px; }
+      h1 { font-size: 1.7rem; }
+      .points-value { font-size: 1.8rem; padding: 4px 18px; }
+      .phase-count { font-size: 2.5rem; }
+    }
+  </style>
 </head>
 <body>
-<div class="app-container" id="appContainer">
-    <h1><i class="fas fa-star"></i> ЗВЁЗДЫ И ПЛАНЕТЫ <i class="fas fa-globe"></i></h1>
+<div class="app-card">
+  <h1>
+    <span>🧘</span> 
+    <span>Антистресс ОГЭ</span>
+  </h1>
+  <div class="subhead">
+    ⚡ 9 класс • твой спокойный экзамен
+  </div>
+
+  <!-- панель очков (геймификация) -->
+  <div class="points-panel">
+    <span class="points-label">🧿 очки спокойствия</span>
+    <span class="points-value" id="scoreDisplay">0</span>
+  </div>
+
+  <div class="tools-grid">
     
-    <!-- ЭКРАН СЛАЙДОВ -->
-    <div id="slidesScreen">
-        <div class="counter" id="slideCounter">Слайд 1 / 16</div>
-        <div class="slide-area">
-            <div class="slide-content" id="slideContent"></div>
-            <div style="display: flex; justify-content: center; margin: 10px 0;">
-                <button class="speak-btn" id="speakSlideBtn"><i class="fas fa-volume-up"></i> Послушать</button>
-            </div>
+    <!-- КАРТОЧКА 1: КВАДРАТНОЕ ДЫХАНИЕ -->
+    <div class="tool-card">
+      <div class="tool-title">
+        <span class="tool-icon">🟦</span>
+        <span>Квадратное дыхание</span>
+      </div>
+      <div class="breath-box" id="breathWidget">
+        <div class="breath-phase">
+          <div class="phase-label">Вдох</div>
+          <div class="phase-count" id="inhaleCount">4</div>
         </div>
-        <div class="nav-buttons">
-            <button id="prevSlideBtn" disabled><i class="fas fa-arrow-left"></i> Назад</button>
-            <button id="nextSlideBtn">Далее <i class="fas fa-arrow-right"></i></button>
+        <div class="breath-phase">
+          <div class="phase-label">Задержка</div>
+          <div class="phase-count" id="holdCount">4</div>
         </div>
-        <div style="text-align: center; margin-top: 25px;">
-            <button id="goToTestBtn" class="small-btn" style="background: #e85d04; box-shadow:0 5px 0 #9e2a2b;"><i class="fas fa-pencil-alt"></i> ПЕРЕЙТИ К ТЕСТУ</button>
+        <div class="breath-phase">
+          <div class="phase-label">Выдох</div>
+          <div class="phase-count" id="exhaleCount">4</div>
         </div>
+        <div class="breath-phase">
+          <div class="phase-label">Задержка</div>
+          <div class="phase-count" id="hold2Count">4</div>
+        </div>
+      </div>
+      <p class="small-note" style="margin-top: 0;">🧘 4 сек — вдох, 4 сек — пауза, 4 сек — выдох, 4 сек — пауза. Повторяй 1-2 минуты.</p>
+      <div class="flex-row">
+        <button id="breathCompleteBtn" class="secondary">✅ Я подышал(а) +10 очков</button>
+      </div>
+      <p class="small-note" style="margin-top: 10px;">💡 На экзамене это снижает тревогу за 2 минуты.</p>
     </div>
 
-    <!-- ЭКРАН ТЕСТА -->
-    <div id="testScreen" class="hidden">
-        <h2><i class="fas fa-question-circle"></i> ПРОВЕРЬ СЕБЯ</h2>
-        <div class="test-container">
-            <div id="testHeader">
-                <span style="font-size:1.8rem; font-weight:bold; color:#e0aaff;" id="questionNumDisplay">Вопрос 1 из 8</span>
-            </div>
-            <div class="question" id="questionText"></div>
-            <div class="options" id="optionsContainer"></div>
-            <div id="feedbackArea" class="feedback"></div>
-            <div class="test-nav">
-                <button id="checkAnswerBtn" class="small-btn" style="background:#2d6a4f; box-shadow:0 5px 0 #1b4332;">✅ Проверить</button>
-                <button id="nextQuestionBtn" class="small-btn" disabled>Следующий ➡️</button>
-            </div>
-            <div style="margin-top:20px;">
-                <button id="backToSlidesFromTest" class="small-btn" style="background:#415a77; box-shadow:0 5px 0 #1b263b;"><i class="fas fa-undo-alt"></i> К слайдам</button>
-            </div>
-        </div>
+    <!-- КАРТОЧКА 2: ЛИМОН (мышечная релаксация) -->
+    <div class="tool-card">
+      <div class="tool-title">
+        <span class="tool-icon">🍋</span>
+        <span>Упражнение «Лимон»</span>
+      </div>
+      <div class="lemon-animation" id="lemonBox">
+        <span id="lemonEmoji">🍋</span><br>
+        <span id="lemonText">Сожми лимон сильно-сильно!</span>
+      </div>
+      <button id="lemonStartBtn" class="outline">🤜 Начать сжимать (10 сек)</button>
+      <button id="lemonCompleteBtn" style="margin-top: 8px;">🍋 Расслабил(ась) +10 очков</button>
+      <p class="small-note">Сожми правую руку в кулак, представь что выжимаешь сок. Держи 5-10 сек, резко расслабь.</p>
     </div>
 
-    <!-- ЭКРАН РЕЗУЛЬТАТОВ -->
-    <div id="resultScreen" class="hidden">
-        <div class="result-screen">
-            <i class="fas fa-trophy" style="font-size:5rem; color:#ffea00;"></i>
-            <h2>Молодец!</h2>
-            <div style="font-size:2.5rem; margin:20px 0; color:#ffffff;" id="resultMessage"></div>
-            <button id="restartLessonBtn" class="small-btn" style="background:#9d4edd; box-shadow:0 7px 0 #5a189a; margin-top:20px;"><i class="fas fa-redo-alt"></i> Посмотреть ещё раз</button>
-        </div>
+    <!-- КАРТОЧКА 3: ЗАЗЕМЛЕНИЕ 5-4-3-2-1 -->
+    <div class="tool-card">
+      <div class="tool-title">
+        <span class="tool-icon">👁️</span>
+        <span>Техника «5-4-3-2-1»</span>
+      </div>
+      <p style="margin-bottom: 12px;"><strong>Прямо сейчас найди взглядом:</strong></p>
+      <ul class="grounding-list">
+        <li>🔹 5 предметов, которые видишь</li>
+        <li>🔹 4 вещи, которые можешь потрогать</li>
+        <li>🔹 3 звука, которые слышишь</li>
+        <li>🔹 2 запаха, которые чувствуешь</li>
+        <li>🔹 1 вкус (можно вспомнить)</li>
+      </ul>
+      <div class="quote-box">
+        💬 «Это возвращает мозг в "здесь и сейчас" и выключает панику.»
+      </div>
+      <button id="groundingCompleteBtn">🎯 Я выполнил(а) +15 очков</button>
+      <p class="small-note">Отличный инструмент, если накрывает прямо перед кабинетом.</p>
     </div>
+  </div>
+
+  <!-- мотивационный блок + статистика -->
+  <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0 0;">
+    <span class="badge">📊 57% старшеклассников тревожатся перед экзаменами</span>
+    <div class="reset-area">
+      <button id="resetScoreBtn" style="width: auto; padding: 10px 18px; background: #94a3b8; border-bottom-color: #475569;">🔄 Сброс</button>
+    </div>
+  </div>
+  <div class="footer-note">
+    #класснаяпсихология • сделано с заботой, 2026
+  </div>
 </div>
 
 <script>
-    (function(){
-        "use strict";
+  (function(){
+    "use strict";
 
-        // ---------- СЛАЙДЫ (16 слайдов) ----------
-        const slides = [
-            { 
-                text: "Что такое звёзды?", 
-                icon: "⭐🌟", 
-                extra: "Звёзды — это огромные раскалённые газовые шары, которые излучают собственный свет.",
-                isSpecial: false
-            },
-            { 
-                text: "Звёзды бывают разными", 
-                icon: "🔴🟡🔵", 
-                extra: "По цвету: красные (холодные), жёлтые (горячие), белые и голубые (самые горячие).",
-                isSpecial: false
-            },
-            { 
-                text: "Солнце — это звезда", 
-                icon: "☀️🔥", 
-                extra: "Солнце — ближайшая к нам звезда. Оно даёт свет и тепло, без него жизни на Земле не было бы.",
-                isSpecial: false
-            },
-            { 
-                text: "Что такое созвездия?", 
-                icon: "✨🔭", 
-                extra: "Созвездия — это группы звёзд, которые образуют фигуры на небе. Учёные выделяют 88 созвездий.",
-                isSpecial: false
-            },
-            { 
-                text: "Большая Медведица", 
-                icon: "🐻⭐", 
-                extra: "Самое известное созвездие. Его 7 ярких звёзд образуют фигуру, похожую на ковш.",
-                isConstellation: true,
-                constellation: "big-dipper"
-            },
-            { 
-                text: "Малая Медведица и Полярная звезда", 
-                icon: "🐻✨", 
-                extra: "В созвездии Малой Медведицы находится Полярная звезда. Она всегда указывает на север!",
-                isSpecial: false
-            },
-            { 
-                text: "Что такое планеты?", 
-                icon: "🪐🌍", 
-                extra: "Планеты — это холодные небесные тела, которые не излучают собственный свет, а отражают свет Солнца.",
-                isSpecial: false
-            },
-            { 
-                text: "Солнечная система", 
-                icon: "☀️🪐", 
-                extra: "Солнечная система — это Солнце и 8 планет, которые вращаются вокруг него.",
-                isSpecial: false
-            },
-            { 
-                text: "Планеты земной группы", 
-                icon: "🌍🪨", 
-                extra: "Меркурий, Венера, Земля, Марс. Они состоят из твёрдых пород и находятся ближе к Солнцу.",
-                isPlanetsList: true,
-                planets: ["Меркурий", "Венера", "Земля", "Марс"]
-            },
-            { 
-                text: "Планеты-гиганты", 
-                icon: "🪐💨", 
-                extra: "Юпитер, Сатурн, Уран, Нептун. Это огромные газовые планеты, у них нет твёрдой поверхности.",
-                isPlanetsList: true,
-                planets: ["Юпитер", "Сатурн", "Уран", "Нептун"]
-            },
-            { 
-                text: "Планеты Солнечной системы", 
-                icon: "☀️🪐", 
-                extra: "По порядку от Солнца: Меркурий, Венера, Земля, Марс, Юпитер, Сатурн, Уран, Нептун.",
-                isAllPlanets: true
-            },
-            { 
-                text: "Чем звёзды отличаются от планет?", 
-                icon: "⭐🆚🪐", 
-                extra: "Звёзды излучают собственный свет и горячие. Планеты холодные и светят отражённым светом.",
-                isSpecial: false
-            },
-            { 
-                text: "Интересные факты", 
-                icon: "💡🌌", 
-                extra: "Самая большая планета — Юпитер. Самая горячая планета — Венера. У Сатурна есть красивые кольца.",
-                isSpecial: false
-            },
-            { 
-                text: "Изучают космос астрономы", 
-                icon: "🔭👨‍🔬", 
-                extra: "Учёные, которые изучают звёзды, планеты и другие космические тела, называются астрономами.",
-                isSpecial: false
-            },
-            { 
-                text: "Берегите нашу планету!", 
-                icon: "🌍❤️", 
-                extra: "Земля — наш общий дом. Другой такой планеты, где есть жизнь, пока не найдено.",
-                isSpecial: false
-            },
-            { 
-                text: "Готовы к тесту?", 
-                icon: "📋✅", 
-                extra: "Сейчас проверим, что вы запомнили о звёздах и планетах!",
-                isSpecial: false
-            }
-        ];
+    // ---------- ОЧКИ (геймификация) ----------
+    let calmPoints = 0;
+    const scoreSpan = document.getElementById('scoreDisplay');
 
-        // ---------- ТЕСТ (8 вопросов) ----------
-        const questions = [
-            {
-                question: "Что такое звезда?",
-                options: ["Холодное тело, отражающее свет", "Раскалённый газовый шар, излучающий свет", "Каменная глыба в космосе", "Спутник планеты"],
-                correct: 1
-            },
-            {
-                question: "Какая звезда ближе всего к Земле?",
-                options: ["Полярная звезда", "Сириус", "Солнце", "Альдебаран"],
-                correct: 2
-            },
-            {
-                question: "Сколько планет в Солнечной системе?",
-                options: ["7", "8", "9", "10"],
-                correct: 1
-            },
-            {
-                question: "Какая планета самая большая?",
-                options: ["Земля", "Сатурн", "Юпитер", "Марс"],
-                correct: 2
-            },
-            {
-                question: "Чем звёзды отличаются от планет?",
-                options: ["Звёзды меньше планет", "Звёзды излучают свет, планеты отражают", "Звёзды холоднее планет", "Планеты горячее звёзд"],
-                correct: 1
-            },
-            {
-                question: "Какая звезда всегда указывает на север?",
-                options: ["Сириус", "Полярная звезда", "Альдебаран", "Вега"],
-                correct: 1
-            },
-            {
-                question: "Какая планета находится ближе всех к Солнцу?",
-                options: ["Венера", "Земля", "Меркурий", "Марс"],
-                correct: 2
-            },
-            {
-                question: "Как называется созвездие, похожее на ковш?",
-                options: ["Орион", "Кассиопея", "Большая Медведица", "Лебедь"],
-                correct: 2
-            }
-        ];
+    function updateScoreDisplay() {
+      if (scoreSpan) scoreSpan.textContent = calmPoints;
+    }
 
-        // ---------- ПЕРЕМЕННЫЕ ----------
-        let currentSlideIndex = 0;
-        let currentQuestionIndex = 0;
-        let userAnswers = new Array(questions.length).fill(null);
-        let selectedOption = null;
+    function addPoints(points) {
+      calmPoints += points;
+      updateScoreDisplay();
+    }
 
-        const slidesScreen = document.getElementById('slidesScreen');
-        const testScreen = document.getElementById('testScreen');
-        const resultScreen = document.getElementById('resultScreen');
-        const slideContent = document.getElementById('slideContent');
-        const slideCounter = document.getElementById('slideCounter');
-        const prevBtn = document.getElementById('prevSlideBtn');
-        const nextBtn = document.getElementById('nextSlideBtn');
-        const goToTestBtn = document.getElementById('goToTestBtn');
-        const speakSlideBtn = document.getElementById('speakSlideBtn');
-        const questionText = document.getElementById('questionText');
-        const optionsDiv = document.getElementById('optionsContainer');
-        const checkBtn = document.getElementById('checkAnswerBtn');
-        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-        const feedbackArea = document.getElementById('feedbackArea');
-        const questionNumDisplay = document.getElementById('questionNumDisplay');
-        const backToSlidesFromTest = document.getElementById('backToSlidesFromTest');
-        const restartLessonBtn = document.getElementById('restartLessonBtn');
-        const resultMessage = document.getElementById('resultMessage');
+    function resetPoints() {
+      calmPoints = 0;
+      updateScoreDisplay();
+    }
 
-        // ---------- ОТРИСОВКА СЛАЙДОВ ----------
-        function renderSlide(index) {
-            const slide = slides[index];
-            let html = `<div class="slide-icon img-emojii">${slide.icon}</div>`;
-            
-            if (slide.isConstellation) {
-                html += `<div class="slide-text">${slide.text}</div>`;
-                html += `<div class="constellation-box">
-                    <div style="font-size:4rem;">⭐   ⭐   ⭐   ⭐</div>
-                    <div style="font-size:3rem;">    ⭐   ⭐   ⭐</div>
-                    <div style="font-size:2rem; color:#e0aaff; margin-top:10px;">Ковш Большой Медведицы</div>
-                </div>`;
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
-            } else if (slide.isPlanetsList) {
-                html += `<div class="slide-text">${slide.text}</div>`;
-                html += `<div class="planet-list">`;
-                slide.planets.forEach(p => {
-                    html += `<div class="planet-card">${p}</div>`;
-                });
-                html += `</div>`;
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
-            } else if (slide.isAllPlanets) {
-                html += `<div class="slide-text">${slide.text}</div>`;
-                html += `<div class="planet-list" style="grid-template-columns:repeat(4,1fr);">`;
-                const allPlanets = ["Меркурий", "Венера", "Земля", "Марс", "Юпитер", "Сатурн", "Уран", "Нептун"];
-                allPlanets.forEach(p => {
-                    html += `<div class="planet-card">${p}</div>`;
-                });
-                html += `</div>`;
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
-            } else {
-                html += `<div class="slide-text">${slide.text}</div>`;
-                if (slide.extra) {
-                    html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
-                }
-            }
-            
-            slideContent.innerHTML = html;
-            slideCounter.textContent = `Слайд ${index+1} / ${slides.length}`;
-            prevBtn.disabled = (index === 0);
-            nextBtn.disabled = (index === slides.length - 1);
-            if (index === slides.length - 1) {
-                nextBtn.textContent = '🏁 Конец';
-            } else {
-                nextBtn.innerHTML = 'Далее <i class="fas fa-arrow-right"></i>';
-            }
-        }
+    // ---------- КВАДРАТНОЕ ДЫХАНИЕ (визуализация) ----------
+    // просто статичный текст, но кнопка даёт очки
+    document.getElementById('breathCompleteBtn').addEventListener('click', function() {
+      addPoints(10);
+      // небольшая анимация (опционально)
+      this.textContent = '✅ Отлично! +10';
+      setTimeout(() => { this.textContent = '✅ Я подышал(а) +10 очков'; }, 1200);
+    });
 
-        function nextSlide() {
-            if (currentSlideIndex < slides.length - 1) {
-                currentSlideIndex++;
-                renderSlide(currentSlideIndex);
-            }
-        }
+    // ---------- ЛИМОН: таймер и интерактив ----------
+    const lemonEmoji = document.getElementById('lemonEmoji');
+    const lemonText = document.getElementById('lemonText');
+    const lemonStartBtn = document.getElementById('lemonStartBtn');
+    const lemonCompleteBtn = document.getElementById('lemonCompleteBtn');
 
-        function prevSlide() {
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
-                renderSlide(currentSlideIndex);
-            }
-        }
+    let lemonTimer = null;
+    let lemonActive = false;
 
-        // Озвучка слайда
-        function speakSlideText() {
-            const slide = slides[currentSlideIndex];
-            let textToSpeak = slide.text + ". ";
-            if (slide.extra) {
-                textToSpeak += slide.extra;
-            }
-            if (slide.isPlanetsList && slide.planets) {
-                textToSpeak += " Эти планеты: " + slide.planets.join(", ") + ".";
-            }
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                utterance.lang = 'ru-RU';
-                utterance.rate = 0.9;
-                window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Озвучивание не поддерживается.");
-            }
-        }
+    function resetLemonUI() {
+      if (lemonTimer) clearTimeout(lemonTimer);
+      lemonActive = false;
+      lemonEmoji.textContent = '🍋';
+      lemonText.textContent = 'Сожми лимон сильно-сильно!';
+      lemonStartBtn.textContent = '🤜 Начать сжимать (10 сек)';
+      lemonStartBtn.disabled = false;
+    }
 
-        // ---------- ТЕСТ ----------
-        function showTestScreen() {
-            slidesScreen.classList.add('hidden');
-            testScreen.classList.remove('hidden');
-            resultScreen.classList.add('hidden');
-            resetTestState();
-            renderQuestion(currentQuestionIndex);
-        }
+    lemonStartBtn.addEventListener('click', function() {
+      if (lemonActive) return;
+      lemonActive = true;
+      lemonStartBtn.disabled = true;
+      lemonStartBtn.textContent = '⚡ Сжимаем...';
+      lemonEmoji.textContent = '💪🍋';
+      lemonText.textContent = 'Держи напряжение! Ещё чуть-чуть...';
 
-        function resetTestState() {
-            currentQuestionIndex = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            selectedOption = null;
-            nextQuestionBtn.disabled = true;
-            checkBtn.disabled = false;
-            feedbackArea.innerHTML = '';
-            feedbackArea.className = 'feedback';
-        }
+      lemonTimer = setTimeout(() => {
+        lemonEmoji.textContent = '😮‍💨🍋';
+        lemonText.textContent = 'Резко расслабь руку! Почувствуй разницу.';
+        lemonStartBtn.textContent = '✅ Упражнение завершено';
+        lemonActive = false;
+        lemonStartBtn.disabled = false;
+        // Очки даём только по кнопке завершения
+      }, 10000); // 10 секунд
+    });
 
-        function renderQuestion(qIndex) {
-            const q = questions[qIndex];
-            questionText.textContent = q.question;
-            questionNumDisplay.textContent = `Вопрос ${qIndex+1} из ${questions.length}`;
-            let optsHtml = '';
-            q.options.forEach((opt, idx) => {
-                const selectedClass = (userAnswers[qIndex] === idx) ? 'selected' : '';
-                optsHtml += `<button class="option-btn ${selectedClass}" data-opt-index="${idx}">${opt}</button>`;
-            });
-            optionsDiv.innerHTML = optsHtml;
-            
-            if (userAnswers[qIndex] !== null) {
-                checkBtn.disabled = true;
-                const isCorrect = (userAnswers[qIndex] === q.correct);
-                showFeedback(isCorrect);
-                nextQuestionBtn.disabled = false;
-            } else {
-                checkBtn.disabled = false;
-                nextQuestionBtn.disabled = true;
-                feedbackArea.innerHTML = '';
-                feedbackArea.className = 'feedback';
-                selectedOption = null;
-            }
-            
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    if (userAnswers[qIndex] !== null) return;
-                    const idx = parseInt(btn.dataset.optIndex);
-                    selectedOption = idx;
-                    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                });
-            });
-        }
+    lemonCompleteBtn.addEventListener('click', function() {
+      if (lemonActive) {
+        // если таймер ещё идёт, сбросим его
+        clearTimeout(lemonTimer);
+        lemonActive = false;
+        lemonStartBtn.disabled = false;
+        lemonStartBtn.textContent = '🤜 Начать сжимать (10 сек)';
+        lemonEmoji.textContent = '🍋';
+        lemonText.textContent = 'Сожми лимон сильно-сильно!';
+      }
+      addPoints(10);
+      lemonCompleteBtn.textContent = '🍋 +10 (расслабление)';
+      setTimeout(() => { lemonCompleteBtn.textContent = '🍋 Расслабил(ась) +10 очков'; }, 1200);
+    });
 
-        function showFeedback(isCorrect) {
-            const q = questions[currentQuestionIndex];
-            if (isCorrect) {
-                feedbackArea.innerHTML = '<i class="fas fa-check-circle"></i> Правильно! Молодец!';
-                feedbackArea.className = 'feedback correct-feedback';
-            } else {
-                feedbackArea.innerHTML = `<i class="fas fa-times-circle"></i> Неверно. Правильный ответ: ${q.options[q.correct]}`;
-                feedbackArea.className = 'feedback wrong-feedback';
-            }
-        }
+    // ---------- ТЕХНИКА 5-4-3-2-1 ----------
+    document.getElementById('groundingCompleteBtn').addEventListener('click', function() {
+      addPoints(15);
+      this.textContent = '🎯 Супер! +15 очков';
+      setTimeout(() => { this.textContent = '🎯 Я выполнил(а) +15 очков'; }, 1500);
+    });
 
-        function checkAnswer() {
-            const qIdx = currentQuestionIndex;
-            if (userAnswers[qIdx] !== null) return;
-            if (selectedOption === null) { alert("Выбери ответ!"); return; }
-            const q = questions[qIdx];
-            const isCorrect = (selectedOption === q.correct);
-            userAnswers[qIdx] = selectedOption;
-            showFeedback(isCorrect);
-            checkBtn.disabled = true;
-            nextQuestionBtn.disabled = false;
-        }
+    // ---------- СБРОС ОЧКОВ ----------
+    document.getElementById('resetScoreBtn').addEventListener('click', function() {
+      resetPoints();
+    });
 
-        function nextQuestion() {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                selectedOption = null;
-                renderQuestion(currentQuestionIndex);
-            } else {
-                finishTest();
-            }
-        }
+    // инициализация
+    updateScoreDisplay();
 
-        function finishTest() {
-            testScreen.classList.add('hidden');
-            resultScreen.classList.remove('hidden');
-            const correctCount = userAnswers.reduce((acc, ans, idx) => acc + (ans === questions[idx].correct ? 1 : 0), 0);
-            let msg = `Ты ответил правильно на ${correctCount} из ${questions.length}. `;
-            if (correctCount === questions.length) msg += "Отлично! Ты всё запомнил!";
-            else if (correctCount >= 5) msg += "Хорошо! Но можно повторить слайды.";
-            else msg += "Давай ещё раз посмотрим слайды, и всё получится!";
-            resultMessage.textContent = msg;
-        }
+    // доп. безопасность: если пользователь уходит со страницы, таймер всё равно очистится
+    window.addEventListener('beforeunload', function() {
+      if (lemonTimer) clearTimeout(lemonTimer);
+    });
 
-        function goBackToSlides() {
-            testScreen.classList.add('hidden');
-            resultScreen.classList.add('hidden');
-            slidesScreen.classList.remove('hidden');
-        }
-
-        function restartLesson() {
-            currentSlideIndex = 0;
-            renderSlide(0);
-            slidesScreen.classList.remove('hidden');
-            testScreen.classList.add('hidden');
-            resultScreen.classList.add('hidden');
-            resetTestState();
-        }
-
-        // ---------- ИНИЦИАЛИЗАЦИЯ ----------
-        function init() {
-            renderSlide(0);
-            prevBtn.addEventListener('click', prevSlide);
-            nextBtn.addEventListener('click', nextSlide);
-            speakSlideBtn.addEventListener('click', speakSlideText);
-            goToTestBtn.addEventListener('click', showTestScreen);
-            checkBtn.addEventListener('click', checkAnswer);
-            nextQuestionBtn.addEventListener('click', nextQuestion);
-            backToSlidesFromTest.addEventListener('click', goBackToSlides);
-            restartLessonBtn.addEventListener('click', restartLesson);
-        }
-        init();
-    })();
+  })();
 </script>
 </body>
 </html>
