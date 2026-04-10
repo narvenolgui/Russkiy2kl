@@ -169,13 +169,13 @@
       </div>
     </div>
 
-    <!-- ЭТАП 3: УПРАЖНЕНИЯ (5 техник с подробными инструкциями) -->
+    <!-- ЭТАП 3: УПРАЖНЕНИЯ (5 техник) -->
     <div id="step3" class="step-content">
       <div class="slide-container">
         <div class="slide active" data-slide="1">
           <div class="progress-indicator">Техника 1 из 5</div>
           <div class="tool-card">
-            <div class="tool-title"><span>🟦</span> Квадратное дыхание</div>
+            <div class="tool-title"><span>🟦</span> Дыхание по квадрату</div>
             <p><strong>Как делать:</strong> Вдыхай носом 4 секунды, задержи дыхание на 4 секунды, выдыхай ртом 4 секунды, снова задержи на 4 секунды. Повтори 3-4 цикла.</p>
             <p><strong>Зачем:</strong> Снижает уровень кортизола, успокаивает сердцебиение, возвращает ясность ума. Можно использовать прямо на экзамене.</p>
             <button class="complete-exercise" data-ex="1">✅ Выполнил(а) +10</button>
@@ -242,7 +242,7 @@
       <div class="tool-card">
         <div class="tool-title"><span>🧘</span> Утром перед экзаменом</div>
         <ul><li>🔹 Питательный завтрак (белок + сложные углеводы).</li>
-        <li>🔹 2 цикла «квадратного дыхания».</li>
+        <li>🔹 2 цикла «дыхания по квадрату».</li>
         <li>🔹 Установка: «Я спокоен, я готов».</li></ul>
       </div>
       <div class="quote-box">💡 85% успеха — знания, 43% — управление стрессом.</div>
@@ -304,8 +304,8 @@
         const list = document.getElementById('completedExList');
         list.innerHTML = '';
         const exs = [
-          {done: ex1done, name: 'Квадратное дыхание'}, {done: ex2done, name: 'Объятие бабочки'},
-          {done: ex3done, name: 'Стоп-кран'}, {done: ex4done, name: 'Ощути время'}, {done: ex5done, name: 'Визуализация'}
+          {done: ex1done, name: 'Дыхание по квадрату'}, {done: ex2done, name: 'Объятие бабочки'},
+          {done: ex3done, name: 'Стоп-кран'}, {done: ex4done, name: 'Ощути время'}, {done: ex5done, name: 'Безопасное место'}
         ];
         exs.forEach(e => { if(e.done) { const li = document.createElement('li'); li.textContent = '✅ ' + e.name; list.appendChild(li); }});
       }
