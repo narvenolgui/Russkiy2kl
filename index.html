@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Многообразие насекомых · 3 класс (ЗПР 7.1)</title>
+    <title>Звёзды и планеты · 3 класс (ЗПР 7.1)</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Arial', 'Helvetica', sans-serif;
-            background: #e8f5e9;
+            background: #0d1b2a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -19,30 +19,30 @@
         .app-container {
             max-width: 950px;
             width: 100%;
-            background: #ffffff;
+            background: #1b263b;
             border-radius: 40px;
-            box-shadow: 0 15px 30px rgba(0, 40, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
             padding: 24px 24px 32px;
-            border: 3px solid #4caf50;
+            border: 3px solid #415a77;
             transition: all 0.2s;
         }
         h1, h2 {
-            color: #1b5e20;
+            color: #e0aaff;
             text-align: center;
             font-weight: 700;
             letter-spacing: 1px;
         }
-        h1 { font-size: 2.3rem; margin: 5px 0 10px; text-shadow: 2px 2px 0 #c8e6c9; }
-        h2 { font-size: 1.8rem; margin: 15px 0 10px; border-bottom: 3px dotted #81c784; padding-bottom: 8px; }
+        h1 { font-size: 2.3rem; margin: 5px 0 10px; text-shadow: 2px 2px 0 #3c096c; }
+        h2 { font-size: 1.8rem; margin: 15px 0 10px; border-bottom: 3px dotted #9d4edd; padding-bottom: 8px; }
         .screen { display: block; }
         .hidden { display: none !important; }
         .slide-area {
-            background: #f1f8e9;
+            background: #2c3e50;
             border-radius: 30px;
             padding: 20px 20px 25px;
             margin: 10px 0 20px;
-            border: 2px solid #a5d6a7;
-            box-shadow: inset 0 0 0 2px #ffffff, 0 8px 0 #2e7d32;
+            border: 2px solid #5a189a;
+            box-shadow: inset 0 0 0 2px #1b263b, 0 8px 0 #240046;
         }
         .slide-content {
             min-height: 320px;
@@ -55,24 +55,24 @@
             font-size: 1.8rem;
             line-height: 1.4;
             text-align: center;
-            color: #1e3a1e;
+            color: #ffea00;
             margin: 15px 0;
             font-weight: 600;
-            background: #fff9c4;
+            background: #3c096c;
             padding: 20px 15px;
             border-radius: 50px;
-            border: 2px solid #f9a825;
+            border: 2px solid #e0aaff;
             width: 100%;
-            box-shadow: 0 4px 0 #b26a00;
+            box-shadow: 0 4px 0 #240046;
         }
         .slide-icon { font-size: 5rem; margin: 5px 0; }
         .fact-badge {
-            background: #ffecb3;
+            background: #5a189a;
             padding: 10px 20px;
             border-radius: 40px;
             font-size: 1.5rem;
-            border: 2px solid #ffa000;
-            color: #3e2723;
+            border: 2px solid #e0aaff;
+            color: #ffffff;
             margin-top: 10px;
         }
         .stages {
@@ -84,18 +84,18 @@
             flex-wrap: wrap;
         }
         .stage-item {
-            background: #e1f5fe;
+            background: #240046;
             border-radius: 30px;
             padding: 15px 10px;
             min-width: 120px;
             text-align: center;
-            border: 2px solid #0288d1;
-            box-shadow: 0 5px 0 #0277bd;
+            border: 2px solid #9d4edd;
+            box-shadow: 0 5px 0 #3c096c;
             font-weight: bold;
         }
         .stage-emoji { font-size: 3.5rem; display: block; }
-        .stage-text { font-size: 1.5rem; color: #01579b; }
-        .arrow-symbol { font-size: 3rem; color: #f57c00; font-weight: bold; }
+        .stage-text { font-size: 1.5rem; color: #e0aaff; }
+        .arrow-symbol { font-size: 3rem; color: #ffea00; font-weight: bold; }
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -103,7 +103,7 @@
             gap: 12px;
         }
         button {
-            background: #4caf50;
+            background: #9d4edd;
             border: none;
             color: white;
             font-weight: bold;
@@ -111,9 +111,9 @@
             padding: 16px 30px;
             border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 7px 0 #1b5e20;
+            box-shadow: 0 7px 0 #5a189a;
             transition: 0.07s;
-            border: 2px solid #a5d6a7;
+            border: 2px solid #c77dff;
             flex: 1;
             text-align: center;
             min-width: 120px;
@@ -122,40 +122,40 @@
         button.small-btn {
             font-size: 1.5rem;
             padding: 12px 20px;
-            box-shadow: 0 5px 0 #1b5e20;
+            box-shadow: 0 5px 0 #5a189a;
         }
         button:active {
             transform: translateY(5px);
-            box-shadow: 0 2px 0 #1b5e20;
+            box-shadow: 0 2px 0 #5a189a;
         }
         button:disabled {
             opacity: 0.5;
             transform: none;
-            box-shadow: 0 7px 0 #1b5e20;
+            box-shadow: 0 7px 0 #5a189a;
             pointer-events: none;
         }
         .speak-btn {
-            background: #ff9800;
-            box-shadow: 0 5px 0 #b85e00;
-            border-color: #ffe0b2;
+            background: #e07a5f;
+            box-shadow: 0 5px 0 #9e2a2b;
+            border-color: #ffb5a7;
             font-size: 1.5rem;
             padding: 10px 25px;
             flex: 0.5;
         }
         .test-container {
-            background: #e1f5fe;
+            background: #1b263b;
             border-radius: 30px;
             padding: 20px;
-            border: 3px solid #0288d1;
+            border: 3px solid #9d4edd;
             margin-top: 15px;
         }
         .question {
             font-size: 2rem;
             font-weight: bold;
-            color: #01579b;
+            color: #ffea00;
             margin-bottom: 25px;
             text-align: center;
-            background: #b3e5fc;
+            background: #3c096c;
             padding: 15px;
             border-radius: 30px;
         }
@@ -166,10 +166,10 @@
             margin-bottom: 25px;
         }
         .option-btn {
-            background: #ffffff;
-            color: #1e3a1e;
-            box-shadow: 0 5px 0 #78909c;
-            border: 3px solid #4fc3f7;
+            background: #2c3e50;
+            color: #ffffff;
+            box-shadow: 0 5px 0 #1b263b;
+            border: 3px solid #9d4edd;
             font-size: 1.6rem;
             padding: 18px 5px;
             border-radius: 50px;
@@ -178,9 +178,10 @@
             text-align: center;
         }
         .option-btn.selected {
-            background: #ffd54f;
-            border: 4px solid #f57f17;
-            box-shadow: 0 3px 0 #b26a00;
+            background: #ffb703;
+            color: #000000;
+            border: 4px solid #ffea00;
+            box-shadow: 0 3px 0 #e85d04;
             transform: translateY(2px);
         }
         .feedback {
@@ -191,8 +192,8 @@
             margin: 15px 0;
             font-weight: bold;
         }
-        .correct-feedback { background: #c8e6c9; color: #1b5e20; }
-        .wrong-feedback { background: #ffcdd2; color: #b71c1c; }
+        .correct-feedback { background: #2d6a4f; color: #ffffff; }
+        .wrong-feedback { background: #ba1826; color: #ffffff; }
         .test-nav {
             display: flex;
             justify-content: center;
@@ -202,28 +203,38 @@
             text-align: center;
             font-size: 2.5rem;
             padding: 20px;
+            color: #e0aaff;
         }
         .counter {
             font-size: 1.4rem;
-            color: #33691e;
+            color: #c77dff;
             text-align: right;
             margin-bottom: 5px;
         }
-        .grid-2 {
+        .planet-list {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             width: 100%;
             margin: 15px 0;
         }
-        .card {
-            background: #fff9c4;
-            border-radius: 20px;
-            padding: 15px;
+        .planet-card {
+            background: #240046;
+            border-radius: 15px;
+            padding: 10px 5px;
             text-align: center;
-            border: 2px solid #f9a825;
-            font-size: 1.4rem;
+            border: 2px solid #9d4edd;
+            color: #ffffff;
+            font-size: 1.2rem;
             font-weight: bold;
+        }
+        .constellation-box {
+            background: #1b263b;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            border: 3px dashed #ffea00;
         }
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
@@ -231,17 +242,18 @@
             button { font-size: 1.4rem; padding: 14px 10px; }
             .options { grid-template-columns: 1fr; }
             .stage-item { min-width: 90px; }
+            .planet-list { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div class="app-container" id="appContainer">
-    <h1><i class="fas fa-bug"></i> НАСЕКОМЫЕ <i class="fas fa-butterfly"></i></h1>
+    <h1><i class="fas fa-star"></i> ЗВЁЗДЫ И ПЛАНЕТЫ <i class="fas fa-globe"></i></h1>
     
     <!-- ЭКРАН СЛАЙДОВ -->
     <div id="slidesScreen">
-        <div class="counter" id="slideCounter">Слайд 1 / 17</div>
+        <div class="counter" id="slideCounter">Слайд 1 / 16</div>
         <div class="slide-area">
             <div class="slide-content" id="slideContent"></div>
             <div style="display: flex; justify-content: center; margin: 10px 0;">
@@ -253,7 +265,7 @@
             <button id="nextSlideBtn">Далее <i class="fas fa-arrow-right"></i></button>
         </div>
         <div style="text-align: center; margin-top: 25px;">
-            <button id="goToTestBtn" class="small-btn" style="background: #ffb300; box-shadow:0 5px 0 #b26a00;"><i class="fas fa-pencil-alt"></i> ПЕРЕЙТИ К ТЕСТУ</button>
+            <button id="goToTestBtn" class="small-btn" style="background: #e85d04; box-shadow:0 5px 0 #9e2a2b;"><i class="fas fa-pencil-alt"></i> ПЕРЕЙТИ К ТЕСТУ</button>
         </div>
     </div>
 
@@ -262,17 +274,17 @@
         <h2><i class="fas fa-question-circle"></i> ПРОВЕРЬ СЕБЯ</h2>
         <div class="test-container">
             <div id="testHeader">
-                <span style="font-size:1.8rem; font-weight:bold;" id="questionNumDisplay">Вопрос 1 из 8</span>
+                <span style="font-size:1.8rem; font-weight:bold; color:#e0aaff;" id="questionNumDisplay">Вопрос 1 из 8</span>
             </div>
             <div class="question" id="questionText"></div>
             <div class="options" id="optionsContainer"></div>
             <div id="feedbackArea" class="feedback"></div>
             <div class="test-nav">
-                <button id="checkAnswerBtn" class="small-btn" style="background:#0277bd; box-shadow:0 5px 0 #01416b;">✅ Проверить</button>
+                <button id="checkAnswerBtn" class="small-btn" style="background:#2d6a4f; box-shadow:0 5px 0 #1b4332;">✅ Проверить</button>
                 <button id="nextQuestionBtn" class="small-btn" disabled>Следующий ➡️</button>
             </div>
             <div style="margin-top:20px;">
-                <button id="backToSlidesFromTest" class="small-btn" style="background:#78909c; box-shadow:0 5px 0 #455a64;"><i class="fas fa-undo-alt"></i> К слайдам</button>
+                <button id="backToSlidesFromTest" class="small-btn" style="background:#415a77; box-shadow:0 5px 0 #1b263b;"><i class="fas fa-undo-alt"></i> К слайдам</button>
             </div>
         </div>
     </div>
@@ -280,10 +292,10 @@
     <!-- ЭКРАН РЕЗУЛЬТАТОВ -->
     <div id="resultScreen" class="hidden">
         <div class="result-screen">
-            <i class="fas fa-trophy" style="font-size:5rem; color:#f9a825;"></i>
+            <i class="fas fa-trophy" style="font-size:5rem; color:#ffea00;"></i>
             <h2>Молодец!</h2>
-            <div style="font-size:2.5rem; margin:20px 0;" id="resultMessage"></div>
-            <button id="restartLessonBtn" class="small-btn" style="background:#4caf50; box-shadow:0 7px 0 #1b5e20; margin-top:20px;"><i class="fas fa-redo-alt"></i> Посмотреть ещё раз</button>
+            <div style="font-size:2.5rem; margin:20px 0; color:#ffffff;" id="resultMessage"></div>
+            <button id="restartLessonBtn" class="small-btn" style="background:#9d4edd; box-shadow:0 7px 0 #5a189a; margin-top:20px;"><i class="fas fa-redo-alt"></i> Посмотреть ещё раз</button>
         </div>
     </div>
 </div>
@@ -292,152 +304,149 @@
     (function(){
         "use strict";
 
-        // ---------- СЛАЙДЫ (17 слайдов для 3 класса) ----------
+        // ---------- СЛАЙДЫ (16 слайдов) ----------
         const slides = [
             { 
-                text: "Многообразие насекомых", 
-                icon: "🐞🐝🦋", 
-                extra: "Самая многочисленная группа животных на Земле: более 1 млн видов!",
+                text: "Что такое звёзды?", 
+                icon: "⭐🌟", 
+                extra: "Звёзды — это огромные раскалённые газовые шары, которые излучают собственный свет.",
                 isSpecial: false
             },
             { 
-                text: "Кто такие насекомые?", 
-                icon: "🔍", 
-                extra: "У всех насекомых 6 ног. Тело состоит из трёх частей: голова, грудь, брюшко.",
+                text: "Звёзды бывают разными", 
+                icon: "🔴🟡🔵", 
+                extra: "По цвету: красные (холодные), жёлтые (горячие), белые и голубые (самые горячие).",
                 isSpecial: false
             },
             { 
-                text: "Строение насекомого", 
-                icon: "🐜", 
-                extra: "На голове — усики и глаза. К груди крепятся 6 ног и крылья. В брюшке — органы пищеварения.",
+                text: "Солнце — это звезда", 
+                icon: "☀️🔥", 
+                extra: "Солнце — ближайшая к нам звезда. Оно даёт свет и тепло, без него жизни на Земле не было бы.",
                 isSpecial: false
             },
             { 
-                text: "Где живут насекомые?", 
-                icon: "🌍", 
-                extra: "Везде! В почве, в воде, в воздухе, в лесах, на лугах и даже в наших домах.",
+                text: "Что такое созвездия?", 
+                icon: "✨🔭", 
+                extra: "Созвездия — это группы звёзд, которые образуют фигуры на небе. Учёные выделяют 88 созвездий.",
                 isSpecial: false
             },
             { 
-                text: "Чем питаются насекомые?", 
-                icon: "🌿🍖", 
-                extra: "Растительноядные едят растения. Хищные охотятся на других насекомых. Всеядные едят всё.",
+                text: "Большая Медведица", 
+                icon: "🐻⭐", 
+                extra: "Самое известное созвездие. Его 7 ярких звёзд образуют фигуру, похожую на ковш.",
+                isConstellation: true,
+                constellation: "big-dipper"
+            },
+            { 
+                text: "Малая Медведица и Полярная звезда", 
+                icon: "🐻✨", 
+                extra: "В созвездии Малой Медведицы находится Полярная звезда. Она всегда указывает на север!",
                 isSpecial: false
             },
             { 
-                text: "Растительноядные", 
-                icon: "🐛🌱", 
-                extra: "Гусеницы, тля, колорадский жук. Они питаются листьями и соком растений.",
+                text: "Что такое планеты?", 
+                icon: "🪐🌍", 
+                extra: "Планеты — это холодные небесные тела, которые не излучают собственный свет, а отражают свет Солнца.",
                 isSpecial: false
             },
             { 
-                text: "Хищники", 
-                icon: "🐞🕷️", 
-                extra: "Божья коровка поедает тлю. Стрекоза ловит комаров. Жужелица охотится на гусениц.",
+                text: "Солнечная система", 
+                icon: "☀️🪐", 
+                extra: "Солнечная система — это Солнце и 8 планет, которые вращаются вокруг него.",
                 isSpecial: false
             },
             { 
-                text: "Всеядные", 
-                icon: "🐜🍂", 
-                extra: "Муравьи едят и растения, и других насекомых. Тараканы тоже всеядны.",
-                isSpecial: false
+                text: "Планеты земной группы", 
+                icon: "🌍🪨", 
+                extra: "Меркурий, Венера, Земля, Марс. Они состоят из твёрдых пород и находятся ближе к Солнцу.",
+                isPlanetsList: true,
+                planets: ["Меркурий", "Венера", "Земля", "Марс"]
             },
             { 
-                text: "Жизненный цикл бабочки", 
-                icon: "🐛➡️🦋", 
-                extra: "Стадии развития: яйцо → гусеница → куколка → бабочка.",
-                isStagesSlide: true 
+                text: "Планеты-гиганты", 
+                icon: "🪐💨", 
+                extra: "Юпитер, Сатурн, Уран, Нептун. Это огромные газовые планеты, у них нет твёрдой поверхности.",
+                isPlanetsList: true,
+                planets: ["Юпитер", "Сатурн", "Уран", "Нептун"]
             },
             { 
-                text: "Насекомые-опылители", 
-                icon: "🐝🌸", 
-                extra: "Пчёлы, шмели, бабочки переносят пыльцу с цветка на цветок. Без них не будет плодов!",
-                isSpecial: false
+                text: "Планеты Солнечной системы", 
+                icon: "☀️🪐", 
+                extra: "По порядку от Солнца: Меркурий, Венера, Земля, Марс, Юпитер, Сатурн, Уран, Нептун.",
+                isAllPlanets: true
             },
             { 
-                text: "Общественные насекомые", 
-                icon: "🐜👑", 
-                extra: "Муравьи и пчёлы живут большими семьями. У них есть королева, рабочие и солдаты.",
-                isSpecial: false
-            },
-            { 
-                text: "Насекомые-вредители", 
-                icon: "🦗⚠️", 
-                extra: "Саранча, колорадский жук, тля. Они уничтожают урожай, и люди с ними борются.",
-                isSpecial: false
-            },
-            { 
-                text: "Полезные насекомые", 
-                icon: "🐞✅", 
-                extra: "Божья коровка, златоглазка, наездник. Они поедают вредителей и защищают наши сады!",
-                isSpecial: false
-            },
-            { 
-                text: "Маскировка", 
-                icon: "🦗🌿", 
-                extra: "Многие насекомые умеют прятаться. Палочник похож на веточку, а кузнечик — на лист.",
+                text: "Чем звёзды отличаются от планет?", 
+                icon: "⭐🆚🪐", 
+                extra: "Звёзды излучают собственный свет и горячие. Планеты холодные и светят отражённым светом.",
                 isSpecial: false
             },
             { 
                 text: "Интересные факты", 
-                icon: "💡", 
-                extra: "Стрекоза — самый быстрый летун (до 50 км/ч). Муравей может поднять вес в 50 раз больше своего!",
+                icon: "💡🌌", 
+                extra: "Самая большая планета — Юпитер. Самая горячая планета — Венера. У Сатурна есть красивые кольца.",
                 isSpecial: false
             },
             { 
-                text: "Берегите насекомых!", 
-                icon: "🤲❤️", 
-                extra: "Не ловите бабочек, не разрушайте муравейники. Насекомые — важная часть природы!",
+                text: "Изучают космос астрономы", 
+                icon: "🔭👨‍🔬", 
+                extra: "Учёные, которые изучают звёзды, планеты и другие космические тела, называются астрономами.",
+                isSpecial: false
+            },
+            { 
+                text: "Берегите нашу планету!", 
+                icon: "🌍❤️", 
+                extra: "Земля — наш общий дом. Другой такой планеты, где есть жизнь, пока не найдено.",
                 isSpecial: false
             },
             { 
                 text: "Готовы к тесту?", 
                 icon: "📋✅", 
-                extra: "Сейчас проверим, что вы запомнили. Нажмите жёлтую кнопку!",
+                extra: "Сейчас проверим, что вы запомнили о звёздах и планетах!",
                 isSpecial: false
             }
         ];
 
-        // ---------- ТЕСТ (8 вопросов, усложнён для 3 класса) ----------
+        // ---------- ТЕСТ (8 вопросов) ----------
         const questions = [
             {
-                question: "Сколько ног у всех насекомых?",
-                options: ["4", "6", "8", "10"],
+                question: "Что такое звезда?",
+                options: ["Холодное тело, отражающее свет", "Раскалённый газовый шар, излучающий свет", "Каменная глыба в космосе", "Спутник планеты"],
                 correct: 1
             },
             {
-                question: "Из каких частей состоит тело насекомого?",
-                options: ["Голова, грудь, брюшко", "Голова, туловище, хвост", "Голова, ноги, крылья", "Грудь, брюшко, хвост"],
-                correct: 0
+                question: "Какая звезда ближе всего к Земле?",
+                options: ["Полярная звезда", "Сириус", "Солнце", "Альдебаран"],
+                correct: 2
             },
             {
-                question: "К какой группе по питанию относится божья коровка?",
-                options: ["Растительноядные", "Хищники", "Всеядные", "Паразиты"],
+                question: "Сколько планет в Солнечной системе?",
+                options: ["7", "8", "9", "10"],
                 correct: 1
             },
             {
-                question: "Какие насекомые живут большими семьями с королевой?",
-                options: ["Бабочки", "Муравьи и пчёлы", "Кузнечики", "Жуки"],
+                question: "Какая планета самая большая?",
+                options: ["Земля", "Сатурн", "Юпитер", "Марс"],
+                correct: 2
+            },
+            {
+                question: "Чем звёзды отличаются от планет?",
+                options: ["Звёзды меньше планет", "Звёзды излучают свет, планеты отражают", "Звёзды холоднее планет", "Планеты горячее звёзд"],
                 correct: 1
             },
             {
-                question: "Зачем нужны насекомые-опылители?",
-                options: ["Чтобы было красиво", "Они переносят пыльцу, и появляются плоды", "Они едят вредителей", "Они делают мёд"],
+                question: "Какая звезда всегда указывает на север?",
+                options: ["Сириус", "Полярная звезда", "Альдебаран", "Вега"],
                 correct: 1
             },
             {
-                question: "Какое насекомое маскируется под веточку?",
-                options: ["Кузнечик", "Палочник", "Бабочка", "Муравей"],
-                correct: 1
+                question: "Какая планета находится ближе всех к Солнцу?",
+                options: ["Венера", "Земля", "Меркурий", "Марс"],
+                correct: 2
             },
             {
-                question: "В какой последовательности развивается бабочка?",
-                options: ["Бабочка → куколка → гусеница → яйцо", "Яйцо → гусеница → куколка → бабочка", "Куколка → яйцо → гусеница → бабочка", "Гусеница → яйцо → бабочка → куколка"],
-                correct: 1
-            },
-            {
-                question: "Какое насекомое считается опасным вредителем полей?",
-                options: ["Божья коровка", "Пчела", "Саранча", "Стрекоза"],
+                question: "Как называется созвездие, похожее на ковш?",
+                options: ["Орион", "Кассиопея", "Большая Медведица", "Лебедь"],
                 correct: 2
             }
         ];
@@ -472,18 +481,31 @@
             const slide = slides[index];
             let html = `<div class="slide-icon img-emojii">${slide.icon}</div>`;
             
-            if (slide.isStagesSlide) {
+            if (slide.isConstellation) {
                 html += `<div class="slide-text">${slide.text}</div>`;
-                html += `<div class="stages">
-                    <div class="stage-item"><span class="stage-emoji">🥚</span><span class="stage-text">Яйцо</span></div>
-                    <div class="arrow-symbol">➡️</div>
-                    <div class="stage-item"><span class="stage-emoji">🐛</span><span class="stage-text">Гусеница</span></div>
-                    <div class="arrow-symbol">➡️</div>
-                    <div class="stage-item"><span class="stage-emoji">🕰️</span><span class="stage-text">Куколка</span></div>
-                    <div class="arrow-symbol">➡️</div>
-                    <div class="stage-item"><span class="stage-emoji">🦋✨</span><span class="stage-text">Бабочка</span></div>
+                html += `<div class="constellation-box">
+                    <div style="font-size:4rem;">⭐   ⭐   ⭐   ⭐</div>
+                    <div style="font-size:3rem;">    ⭐   ⭐   ⭐</div>
+                    <div style="font-size:2rem; color:#e0aaff; margin-top:10px;">Ковш Большой Медведицы</div>
                 </div>`;
-                html += `<div class="fact-badge"><i class="fas fa-star"></i> Сначала яйцо, потом гусеница, затем куколка, и наконец — прекрасная бабочка!</div>`;
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
+            } else if (slide.isPlanetsList) {
+                html += `<div class="slide-text">${slide.text}</div>`;
+                html += `<div class="planet-list">`;
+                slide.planets.forEach(p => {
+                    html += `<div class="planet-card">${p}</div>`;
+                });
+                html += `</div>`;
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
+            } else if (slide.isAllPlanets) {
+                html += `<div class="slide-text">${slide.text}</div>`;
+                html += `<div class="planet-list" style="grid-template-columns:repeat(4,1fr);">`;
+                const allPlanets = ["Меркурий", "Венера", "Земля", "Марс", "Юпитер", "Сатурн", "Уран", "Нептун"];
+                allPlanets.forEach(p => {
+                    html += `<div class="planet-card">${p}</div>`;
+                });
+                html += `</div>`;
+                html += `<div class="fact-badge"><i class="fas fa-star"></i> ${slide.extra}</div>`;
             } else {
                 html += `<div class="slide-text">${slide.text}</div>`;
                 if (slide.extra) {
@@ -520,10 +542,11 @@
         function speakSlideText() {
             const slide = slides[currentSlideIndex];
             let textToSpeak = slide.text + ". ";
-            if (slide.isStagesSlide) {
-                textToSpeak += "Сначала появляется яйцо. Из него вылупляется гусеница. Затем гусеница превращается в куколку. А из куколки выходит прекрасная бабочка!";
-            } else if (slide.extra) {
+            if (slide.extra) {
                 textToSpeak += slide.extra;
+            }
+            if (slide.isPlanetsList && slide.planets) {
+                textToSpeak += " Эти планеты: " + slide.planets.join(", ") + ".";
             }
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(textToSpeak);
